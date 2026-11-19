@@ -94,6 +94,8 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
             Parent root = loader.load();
+            /* MainController mainController = loader.getController();
+            mainController.configurarSessao(usuarioLogado); */
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1100, 700);

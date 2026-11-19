@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane prefHeight="700.0" prefWidth="1100.0" styleClass="login-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.LoginController">
+<StackPane stylesheets="@styles/login.css" prefHeight="700.0" prefWidth="1100.0" styleClass="login-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.LoginController">
     <children>
         <!-- CARD CENTRAL DE LOGIN -->
         <VBox alignment="TOP_CENTER" fillWidth="true" maxHeight="-Infinity" spacing="18.0" styleClass="login-card">

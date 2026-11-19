@@ -1,0 +1,67 @@
+/* ==========================================================================
+   VISÃO GERAL / DASHBOARD (dashboard-view.fxml)
+   ========================================================================== */
+.content-scroll {
+    -fx-background: -bg-app;
+    -fx-background-color: -bg-app;
+    -fx-border-color: transparent;
+}
+
+.content-scroll > .viewport {
+    -fx-background-color: -bg-app;
+}
+
+.content-area {
+    -fx-padding: 28 30 28 30;
+    -fx-background-color: -bg-app;
+}
+
+/* KPIS */
+.kpi-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+
+.kpi-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.kpi-danger {
+    -fx-text-fill: -status-danger;
+}
+
+.kpi-success {
+    -fx-text-fill: -status-success;
+}
+
+/* BARCHART */
+.dashboard-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.dashboard-chart .axis {
+    -fx-tick-label-fill: -text-muted;
+}
+
+.dashboard-chart .axis-label {
+    -fx-text-fill: -text-muted;
+}
+
+.dashboard-chart .chart-legend {
+    -fx-background-color: transparent;
+}
+
+.dashboard-chart .chart-legend-item {
+    -fx-text-fill: -text-secondary;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: -accent-primary;
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: -status-danger;
+}

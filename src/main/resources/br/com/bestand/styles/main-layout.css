@@ -1,0 +1,192 @@
+/* ==========================================================================
+   CASCA SPA PRINCIPAL (main-view.fxml)
+   ========================================================================== */
+.app-root {
+    -fx-background-color: -bg-app;
+}
+
+/* SIDEBAR */
+.sidebar {
+    -fx-background-color: -bg-sidebar;
+    -fx-border-color: transparent -border-default transparent transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 24 16 24 16;
+}
+
+.brand-box {
+    -fx-padding: 0 12 20 12;
+    -fx-border-color: transparent transparent -border-default transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-margin: 0 0 18 0;
+}
+
+.brand-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.brand-subtitle {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.nav-section-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-placeholder;
+    -fx-padding: 14 12 8 12;
+}
+
+.nav-btn {
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-padding: 10 12 10 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-secondary;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+}
+
+.nav-btn:hover {
+    -fx-background-color: -bg-nav-hover;
+    -fx-text-fill: -text-primary;
+}
+
+.nav-btn-active {
+    -fx-background-color: -bg-nav-active;
+    -fx-text-fill: -text-nav-active;
+    -fx-font-weight: bold;
+}
+
+.nav-btn-active:hover {
+    -fx-background-color: -bg-nav-active;
+    -fx-text-fill: -text-nav-active;
+}
+
+.nav-icon {
+    -fx-fill: -text-secondary;
+}
+
+.sidebar-footer {
+    -fx-border-color: -border-default transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 14 0 0 0;
+}
+
+/* TOPBAR */
+.topbar {
+    -fx-background-color: -bg-topbar;
+    -fx-border-color: transparent transparent -border-default transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 30 0 30;
+}
+
+.search-input {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 12 0 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.search-input:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+.topbar-icon-btn {
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.topbar-icon-btn:hover {
+    -fx-background-color: -bg-hover;
+    -fx-border-color: -border-default;
+}
+
+.topbar-divider .line {
+    -fx-border-color: -border-default;
+}
+
+/* BOTÃO DE PERFIL & DROPDOWN */
+.profile-menu-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+}
+
+.profile-menu-btn:hover,
+.profile-menu-btn:showing {
+    -fx-background-color: -bg-hover;
+    -fx-border-color: -border-default;
+}
+
+.profile-menu-btn .arrow-button .arrow {
+    -fx-background-color: -text-muted;
+}
+
+.user-avatar {
+    -fx-pref-width: 34px;
+    -fx-pref-height: 34px;
+    -fx-min-width: 34px;
+    -fx-min-height: 34px;
+    -fx-background-color: -accent-primary;
+    -fx-text-fill: -text-on-accent;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 17;
+}
+
+.user-name {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.user-role {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.context-menu {
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+    -fx-effect: dropshadow(three-pass-box, -shadow-color, 12, 0, 0, 4);
+}
+
+.menu-item {
+    -fx-background-radius: 6;
+    -fx-padding: 8 14 8 14;
+}
+
+.menu-item-danger .label {
+    -fx-text-fill: -status-danger;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.menu-item-danger:focused {
+    -fx-background-color: -status-danger-bg;
+}
+
+/* OUTLET CENTRAL SPA */
+.spa-outlet {
+    -fx-background-color: -bg-app;
+}

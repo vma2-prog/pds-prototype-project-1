@@ -20,10 +20,10 @@ public class ThemeManager {
 
         String lightCss = ThemeManager.class.getResource("themes/theme-light.css").toExternalForm();
         String darkCss = ThemeManager.class.getResource("themes/theme-dark.css").toExternalForm();
-        String baseCss = ThemeManager.class.getResource("style.css").toExternalForm();
+        String globalCss = ThemeManager.class.getResource("styles/global.css").toExternalForm();
 
         scene.getStylesheets().clear();
         scene.getStylesheets().add(darkTheme ? darkCss : lightCss);
-        scene.getStylesheets().add(baseCss);
+        scene.getStylesheets().add(globalCss);
     }
 }
