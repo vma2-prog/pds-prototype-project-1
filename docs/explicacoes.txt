@@ -1,0 +1,50 @@
+Nome do projeto: Bestand
+
+Organização de pastas:
+
+
+./pom.xml:
+    Equivalente ao package.json do javascript.
+
+    Possui informações sobre pacotes necessários para executar o programa em Java.
+
+
+docs/
+    Todos os arquivos com documentação.
+
+    /Bestand-Requisitos.md: É o documento de requisitos da aplicação.
+
+
+interfaces/
+    Pasta com alguns protótipos de interface.
+
+    Qual é a lógica?
+    1. Pretendo fazer alguma interface.
+    2. Peço a alguma inteligência artificial para gerar um arquivo único de HTML&CSS.
+    3. Falo a ela alterações ou sugestões para deixar a interface do jeito que quero.
+    4. Quando ficar satisfeito, mando fazer em Java --- Especificado nos passos seguintes.
+
+    Exemplo:
+        `loginpage.html` é o arquivo que possui o protótipo de interface utilizado no aplicativo.
+        A devida inteface é `login-view.fxml`.
+
+
+src/test/
+    Pasta para testes unitários, ainda não trabalhamos nisso.
+    Mas, o professor pediu para fazermos, depois.
+
+
+src/main/
+    Propriamente o código do aplicativo, separado nas pastas:
+        java/: Todo código Java do programa.
+        resources/: Tudo o que não é Java, como FXML, CSS, possivelmente imagens (não testei).
+
+
+src/main/resources/
+    Dentro dos recursos, existe a pasta 'styles/' para arquivos css normais.
+    Também há a pasta 'themes/', que possui a paleta de cores (em css) para os temas claro e escuro.
+
+    Na raiz, existem arquivos '.fxml', que possuem algo semelhante a um HTML para a página.
+
+    Existe o 'style.css', mas ele é obsoleto. Não sei se removê-lo causará problemas;
+    mas, supostamente, não deveria.
