@@ -85,19 +85,39 @@ public class MainController {
     // =========================================================================
     // NAVEGAÇÃO SPA
     // =========================================================================
+
+
+    private void abrirProdutos(String filtroInicial) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("produtos-view.fxml"));
+            Node view = loader.load();
+
+            ProdutosController controller = loader.getController();
+            if (filtroInicial != null && !filtroInicial.isBlank()) {
+                controller.aplicarFiltroInicial(filtroInicial);
+            }
+
+            spaOutlet.getChildren().setAll(view);
+            marcarBotaoAtivo(btnNavProdutos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
     private void onNavDashboard(ActionEvent event) {
         carregarSubView("dashboard-view.fxml", btnNavDashboard);
     }
 
     @FXML
-    private void onNavProdutos(ActionEvent event) {
-        exibirPlaceholderModulo("Produtos", "Cadastro, edição e controle de catálogo (UC004 – UC006)", btnNavProdutos);
+        void onNavVendas(ActionEvent event) {
+        exibirPlaceholderModulo("Vendas & Devoluções", "Registro de saídas e estornos de venda (UC007 – UC008)", btnNavVendas);
     }
 
     @FXML
-        void onNavVendas(ActionEvent event) {
-        exibirPlaceholderModulo("Vendas & Devoluções", "Registro de saídas e estornos de venda (UC007 – UC008)", btnNavVendas);
+    private void onNavProdutos(ActionEvent event) {
+        abrirProdutos(null);
     }
 
     @FXML
@@ -185,9 +205,7 @@ public class MainController {
     @FXML
     private void onBuscaGlobal(ActionEvent event) {
         String termo = txtBuscaGlobal.getText();
-        if (termo != null && !termo.isBlank()) {
-            onNavProdutos(event);
-        }
+        abrirProdutos(termo);
     }
 
     @FXML
