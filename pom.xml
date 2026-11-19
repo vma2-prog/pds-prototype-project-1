@@ -14,9 +14,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target> -->
-    <!-- <maven.compiler.release>3.16.0</maven.compiler.release> -->
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.release>3.9.11</maven.compiler.release>
     <javafx.version>17.0.2</javafx.version>
   </properties>
 
@@ -103,6 +103,17 @@
             </archive>
           </configuration>
         </plugin>
+
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.11.0</version>
+          <configuration>
+            <release>17</release>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

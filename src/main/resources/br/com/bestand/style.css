@@ -1,0 +1,112 @@
+/* ==========================================================================
+   BASE & PALETA OFICIAL - BESTAND
+   ========================================================================== */
+.root {
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-background-color: #fafbfc;
+}
+
+/* ==========================================================================
+   COMPONENTES GLOBAIS REUTILIZÁVEIS
+   ========================================================================== */
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.form-input {
+    -fx-pref-height: 40px;
+    -fx-padding: 0 12 0 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+    -fx-prompt-text-fill: #95a5a6;
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dcdde1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.form-input:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #3498db;
+}
+
+.btn-primary {
+    -fx-pref-height: 42px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #2980b9;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #2471a3;
+}
+
+.error-banner {
+    -fx-background-color: #fdecea;
+    -fx-border-color: #f5c6cb;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+    -fx-padding: 10 12 10 12;
+}
+
+/* ==========================================================================
+   TELA DE LOGIN (login-view.fxml)
+   ========================================================================== */
+.login-root {
+    -fx-background-color: #fafbfc;
+    -fx-padding: 20;
+}
+
+.login-card {
+    -fx-max-width: 400px;
+    -fx-pref-width: 400px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 40 32 40 32;
+    -fx-effect: dropshadow(three-pass-box, rgba(44, 62, 80, 0.06), 12, 0, 0, 4);
+}
+
+.login-brand-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.login-brand-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.login-footer {
+    -fx-border-color: #f0f2f5 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 16 0 0 0;
+}
+
+.login-hint-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.login-hint-badge {
+    -fx-background-color: #f4f5f7;
+    -fx-text-fill: #2c3e50;
+    -fx-font-family: "Consolas", "Monospaced", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 4;
+}
