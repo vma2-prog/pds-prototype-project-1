@@ -5,12 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<StackPane prefHeight="700.0" prefWidth="1100.0" styleClass="login-root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.LoginController">
+<StackPane prefHeight="700.0" prefWidth="1100.0" styleClass="login-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.LoginController">
     <children>
+        <!-- CARD CENTRAL DE LOGIN -->
         <VBox alignment="TOP_CENTER" fillWidth="true" maxHeight="-Infinity" spacing="18.0" styleClass="login-card">
             <children>
                 <!-- CABEÇALHO DA MARCA -->
@@ -24,7 +27,7 @@
                     </children>
                 </VBox>
 
-                <!-- BANNER DE ERRO (Oculto por padrão) -->
+                <!-- BANNER DE ERRO -->
                 <Label fx:id="lblErroLogin" managed="false" maxWidth="Infinity" styleClass="error-banner" text="Usuário ou senha inválidos. Verifique os dados e tente novamente." visible="false" wrapText="true" />
 
                 <!-- CAMPO: PERFIL DE USUÁRIO -->
@@ -62,5 +65,15 @@
                 </HBox>
             </children>
         </VBox>
+
+        <!-- BOTÃO DE TROCA DE TEMA (CANTO INFERIOR DIREITO) -->
+        <Button fx:id="btnTema" onAction="#onAlternarTema" styleClass="theme-toggle-btn" StackPane.alignment="BOTTOM_RIGHT">
+            <graphic>
+                <SVGPath fx:id="svgIconeTema" content="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" styleClass="theme-icon" />
+            </graphic>
+            <tooltip>
+                <Tooltip text="Alternar tema claro/escuro" />
+            </tooltip>
+        </Button>
     </children>
 </StackPane>
