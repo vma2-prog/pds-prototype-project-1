@@ -24,6 +24,42 @@
     -fx-text-fill: -text-primary;
 }
 
+.kpi-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+
+.kpi-value {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.kpi-caption,
+.section-caption {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.kpi-danger,
+.result-negative {
+    -fx-text-fill: -status-danger;
+}
+
+.result-status {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.result-positive {
+    -fx-text-fill: -status-success;
+}
+
+.result-neutral {
+    -fx-text-fill: -status-warning;
+}
+
 /* FORMULÁRIOS E CAMPOS */
 .form-label {
     -fx-font-size: 13px;
@@ -125,6 +161,64 @@
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-padding: 48 24 48 24;
+}
+
+.module-content {
+    -fx-padding: 26 28 30 28;
+    -fx-background-color: -bg-app;
+}
+
+.memory-notice {
+    -fx-font-size: 11px;
+    -fx-text-fill: -status-warning;
+}
+
+.section-caption {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.module-input,
+.module-combo,
+.period-card .date-picker {
+    -fx-pref-height: 38px;
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.module-input {
+    -fx-padding: 0 10 0 10;
+}
+
+.module-input:focused,
+.module-combo:focused,
+.period-card .date-picker:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+.module-combo .list-cell {
+    -fx-text-fill: -text-primary;
+    -fx-background-color: transparent;
+}
+
+.module-combo-popup .list-view,
+.module-combo-popup .list-cell {
+    -fx-background-color: -bg-card;
+    -fx-text-fill: -text-primary;
+}
+
+.period-card {
+    -fx-padding: 12 16 12 16;
+}
+
+.report-card {
+    -fx-min-height: 112px;
 }
 
 /* ÍCONE DE TEMA */

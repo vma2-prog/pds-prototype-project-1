@@ -34,11 +34,21 @@
 
                 <VBox spacing="4.0">
                     <children>
-                        <Button fx:id="btnNavDashboard" maxWidth="Infinity" onAction="#onNavDashboard" styleClass="nav-btn, nav-btn-active" text="Visão geral" />
-                        <Button fx:id="btnNavProdutos" maxWidth="Infinity" onAction="#onNavProdutos" styleClass="nav-btn" text="Produtos" />
-                        <Button fx:id="btnNavVendas" maxWidth="Infinity" onAction="#onNavVendas" styleClass="nav-btn" text="Vendas &amp; Devoluções" />
-                        <Button fx:id="btnNavCarregamentos" maxWidth="Infinity" onAction="#onNavCarregamentos" styleClass="nav-btn" text="Carregamentos" />
-                        <Button fx:id="btnNavReceitas" maxWidth="Infinity" onAction="#onNavReceitas" styleClass="nav-btn" text="Receitas &amp; Análises" />
+                        <Button fx:id="btnNavDashboard" maxWidth="Infinity" onAction="#onNavDashboard" styleClass="nav-btn, nav-btn-active" text="Visão geral">
+                            <tooltip><Tooltip text="Resumo do estoque e das movimentações da loja" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavProdutos" maxWidth="Infinity" onAction="#onNavProdutos" styleClass="nav-btn" text="Produtos">
+                            <tooltip><Tooltip text="Consulte e gerencie os produtos cadastrados" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavVendas" maxWidth="Infinity" onAction="#onNavVendas" styleClass="nav-btn" text="Vendas &amp; Devoluções">
+                            <tooltip><Tooltip text="Acesse os registros de vendas e estornos" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavCarregamentos" maxWidth="Infinity" onAction="#onNavCarregamentos" styleClass="nav-btn" text="Carregamentos">
+                            <tooltip><Tooltip text="Acesse as entradas e reposições de mercadorias" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavReceitas" maxWidth="Infinity" onAction="#onNavReceitas" styleClass="nav-btn" text="Receitas &amp; Análises">
+                            <tooltip><Tooltip text="Consulte relatórios e análises financeiras" /></tooltip>
+                        </Button>
                     </children>
                 </VBox>
 
@@ -51,6 +61,7 @@
                             <graphic>
                                 <SVGPath content="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.4 0a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" scaleX="0.7" scaleY="0.7" styleClass="nav-icon" />
                             </graphic>
+                            <tooltip><Tooltip text="Gerencie perfis de usuário e preferências" /></tooltip>
                         </Button>
                     </children>
                 </VBox>

@@ -1,9 +1,5 @@
 package br.com.bestand;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -35,16 +31,16 @@ public class ProdutosController {
     @FXML private TextField txtPesquisa;
     @FXML private ComboBox<String> cmbOrdenacao;
 
-    @FXML private TableView<ProdutoItem> tblProdutos;
-    @FXML private TableColumn<ProdutoItem, String> colProduto;
-    @FXML private TableColumn<ProdutoItem, Number> colEstoque;
-    @FXML private TableColumn<ProdutoItem, Number> colPrecoVenda;
-    @FXML private TableColumn<ProdutoItem, String> colSituacao;
-    @FXML private TableColumn<ProdutoItem, Void> colAcoes;
+    @FXML private TableView<LojaService.Produto> tblProdutos;
+    @FXML private TableColumn<LojaService.Produto, String> colProduto;
+    @FXML private TableColumn<LojaService.Produto, Number> colEstoque;
+    @FXML private TableColumn<LojaService.Produto, Number> colPrecoVenda;
+    @FXML private TableColumn<LojaService.Produto, String> colSituacao;
+    @FXML private TableColumn<LojaService.Produto, Void> colAcoes;
 
-    private final ObservableList<ProdutoItem> listaMestra = FXCollections.observableArrayList();
-    private FilteredList<ProdutoItem> listaFiltrada;
-    private SortedList<ProdutoItem> listaOrdenada;
+    private final ObservableList<LojaService.Produto> listaMestra = LojaService.getInstance().getProdutos();
+    private FilteredList<LojaService.Produto> listaFiltrada;
+    private SortedList<LojaService.Produto> listaOrdenada;
 
     private static final NumberFormat MOEDA_BR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
@@ -52,7 +48,6 @@ public class ProdutosController {
     public void initialize() {
         configurarOrdenacao();
         configurarColunas();
-        carregarDadosExemplo();
         configurarFiltrosEOrdenacao();
     }
 
@@ -84,7 +79,7 @@ public class ProdutosController {
                 if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                     setGraphic(null);
                 } else {
-                    ProdutoItem p = getTableRow().getItem();
+                    LojaService.Produto p = getTableRow().getItem();
                     Label lblNome = new Label(p.getNome());
                     lblNome.getStyleClass().add("produto-nome");
 
@@ -158,14 +153,14 @@ public class ProdutosController {
                 MenuItem itemEditar = new MenuItem("Editar produto");
                 itemEditar.getStyleClass().add("menu-item-edit");
                 itemEditar.setOnAction(e -> {
-                    ProdutoItem p = getTableRow().getItem();
+                    LojaService.Produto p = getTableRow().getItem();
                     if (p != null) onEditarProduto(p);
                 });
 
                 MenuItem itemRemover = new MenuItem("Remover produto");
                 itemRemover.getStyleClass().add("menu-item-danger");
                 itemRemover.setOnAction(e -> {
-                    ProdutoItem p = getTableRow().getItem();
+                    LojaService.Produto p = getTableRow().getItem();
                     if (p != null) onRemoverProduto(p);
                 });
 
@@ -194,18 +189,6 @@ public class ProdutosController {
         });
     }
 
-    private void carregarDadosExemplo() {
-        listaMestra.addAll(
-                new ProdutoItem("PRD-001", "Teclado Mecânico RGB", 34, 10, 289.90),
-                new ProdutoItem("PRD-002", "Mouse Sem Fio Ergonômico", 6, 10, 149.50),
-                new ProdutoItem("PRD-003", "Monitor LED 24\" Full HD", 0, 5, 899.00),
-                new ProdutoItem("PRD-004", "Headset USB com Microfone", 18, 8, 179.00),
-                new ProdutoItem("PRD-005", "Cabo HDMI 2.1 Ultra HD 2m", 52, 15, 45.00),
-                new ProdutoItem("PRD-006", "Webcam Full HD 1080p", 4, 8, 220.00),
-                new ProdutoItem("PRD-007", "SSD NVMe 1TB M.2", 0, 6, 459.90)
-        );
-    }
-
     private void configurarFiltrosEOrdenacao() {
         listaFiltrada = new FilteredList<>(listaMestra, p -> true);
 
@@ -229,13 +212,13 @@ public class ProdutosController {
     private void aplicarCriterioOrdenacao(String criterio) {
         if (criterio == null) return;
 
-        Comparator<ProdutoItem> comparator = switch (criterio) {
-            case "Nome (Z → A)" -> Comparator.comparing(ProdutoItem::getNome, String.CASE_INSENSITIVE_ORDER).reversed();
-            case "Estoque (Menor → Maior)" -> Comparator.comparingInt(ProdutoItem::getEstoque);
-            case "Estoque (Maior → Menor)" -> Comparator.comparingInt(ProdutoItem::getEstoque).reversed();
-            case "Preço (Menor → Maior)" -> Comparator.comparingDouble(ProdutoItem::getPrecoVenda);
-            case "Preço (Maior → Menor)" -> Comparator.comparingDouble(ProdutoItem::getPrecoVenda).reversed();
-            default -> Comparator.comparing(ProdutoItem::getNome, String.CASE_INSENSITIVE_ORDER);
+        Comparator<LojaService.Produto> comparator = switch (criterio) {
+            case "Nome (Z → A)" -> Comparator.comparing(LojaService.Produto::getNome, String.CASE_INSENSITIVE_ORDER).reversed();
+            case "Estoque (Menor → Maior)" -> Comparator.comparingInt(LojaService.Produto::getEstoque);
+            case "Estoque (Maior → Menor)" -> Comparator.comparingInt(LojaService.Produto::getEstoque).reversed();
+            case "Preço (Menor → Maior)" -> Comparator.comparingDouble(LojaService.Produto::getPrecoVenda);
+            case "Preço (Maior → Menor)" -> Comparator.comparingDouble(LojaService.Produto::getPrecoVenda).reversed();
+            default -> Comparator.comparing(LojaService.Produto::getNome, String.CASE_INSENSITIVE_ORDER);
         };
 
         listaOrdenada.setComparator(comparator);
@@ -253,7 +236,7 @@ public class ProdutosController {
         info.showAndWait();
     }
 
-    private void onEditarProduto(ProdutoItem produto) {
+    private void onEditarProduto(LojaService.Produto produto) {
         Alert info = new Alert(Alert.AlertType.INFORMATION);
         info.setTitle("Editar Produto");
         info.setHeaderText("Editando: " + produto.getNome() + " (" + produto.getCodigo() + ")");
@@ -261,7 +244,7 @@ public class ProdutosController {
         info.showAndWait();
     }
 
-    private void onRemoverProduto(ProdutoItem produto) {
+    private void onRemoverProduto(LojaService.Produto produto) {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Remover Produto");
         confirm.setHeaderText("Deseja remover \"" + produto.getNome() + "\"?");
@@ -269,45 +252,8 @@ public class ProdutosController {
 
         Optional<ButtonType> resultado = confirm.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            listaMestra.remove(produto);
+            LojaService.getInstance().removerProduto(produto);
         }
     }
 
-    // =========================================================================
-    // MODELO DE EXIBIÇÃO DA TABELA DE PRODUTOS
-    // =========================================================================
-    public static class ProdutoItem {
-        private final SimpleStringProperty codigo;
-        private final SimpleStringProperty nome;
-        private final SimpleIntegerProperty estoque;
-        private final int estoqueMinimo;
-        private final SimpleDoubleProperty precoVenda;
-        private final SimpleStringProperty situacao;
-
-        public ProdutoItem(String codigo, String nome, int estoque, int estoqueMinimo, double precoVenda) {
-            this.codigo = new SimpleStringProperty(codigo);
-            this.nome = new SimpleStringProperty(nome);
-            this.estoque = new SimpleIntegerProperty(estoque);
-            this.estoqueMinimo = estoqueMinimo;
-            this.precoVenda = new SimpleDoubleProperty(precoVenda);
-            this.situacao = new SimpleStringProperty(calcularSituacao(estoque, estoqueMinimo));
-        }
-
-        private static String calcularSituacao(int estoque, int minimo) {
-            if (estoque <= 0) return "Sem estoque";
-            if (estoque <= minimo) return "Estoque baixo";
-            return "Estoque normal";
-        }
-
-        public String getCodigo() { return codigo.get(); }
-        public String getNome() { return nome.get(); }
-        public int getEstoque() { return estoque.get(); }
-        public double getPrecoVenda() { return precoVenda.get(); }
-        public String getSituacao() { return situacao.get(); }
-
-        public SimpleStringProperty nomeProperty() { return nome; }
-        public SimpleIntegerProperty estoqueProperty() { return estoque; }
-        public SimpleDoubleProperty precoVendaProperty() { return precoVenda; }
-        public SimpleStringProperty situacaoProperty() { return situacao; }
-    }
 }

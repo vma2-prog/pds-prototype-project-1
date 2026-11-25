@@ -1,0 +1,7 @@
+.operation-card {
+    -fx-padding: 18 20 18 20;
+}
+
+.data-table .table-cell {
+    -fx-padding: 9 8 9 8;
+}

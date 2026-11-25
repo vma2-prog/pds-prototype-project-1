@@ -111,8 +111,8 @@ public class MainController {
     }
 
     @FXML
-        void onNavVendas(ActionEvent event) {
-        exibirPlaceholderModulo("Vendas & Devoluções", "Registro de saídas e estornos de venda (UC007 – UC008)", btnNavVendas);
+    void onNavVendas(ActionEvent event) {
+        carregarSubView("vendas-view.fxml", btnNavVendas);
     }
 
     @FXML
@@ -121,13 +121,13 @@ public class MainController {
     }
 
     @FXML
-        void onNavCarregamentos(ActionEvent event) {
-        exibirPlaceholderModulo("Carregamentos", "Entrada de mercadorias e reposição de estoque (UC009)", btnNavCarregamentos);
+    void onNavCarregamentos(ActionEvent event) {
+        carregarSubView("carregamentos-view.fxml", btnNavCarregamentos);
     }
 
     @FXML
     private void onNavReceitas(ActionEvent event) {
-        exibirPlaceholderModulo("Receitas & Análises", "Relatórios financeiros e janela de tempo (UC010)", btnNavReceitas);
+        carregarSubView("receitas-view.fxml", btnNavReceitas);
     }
 
     @FXML
