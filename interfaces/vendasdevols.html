@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bestand — Vendas &amp; Devoluções</title>
+  <style>
+    /* ==========================================================================
+       VARIÁVEIS DE TEMA (ESPELHO DE theme-light.css E theme-dark.css)
+       ========================================================================== */
+    :root {
+      --bg-app: #f4f6f9;
+      --bg-sidebar: #ffffff;
+      --bg-topbar: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #f8fafc;
+      --bg-input-focused: #ffffff;
+      --bg-hover: #f1f5f9;
+      --bg-nav-active: #e8f0fe;
+      --bg-badge: #e2e8f0;
+
+      --border-default: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-input: #cbd5e1;
+
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --text-placeholder: #94a3b8;
+      --text-nav-active: #1d4ed8;
+      --text-on-accent: #ffffff;
+
+      --accent-primary: #2563eb;
+      --accent-hover: #1d4ed8;
+
+      --status-success: #15803d;
+      --status-success-bg: #dcfce7;
+      --status-danger: #b91c1c;
+      --status-danger-bg: #fee2e2;
+      --status-warning: #b45309;
+      --status-warning-bg: #fef3c7;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark {
+      --bg-app: #0f172a;
+      --bg-sidebar: #1e293b;
+      --bg-topbar: #1e293b;
+      --bg-card: #1e293b;
+      --bg-input: #0f172a;
+      --bg-input-focused: #162033;
+      --bg-hover: #273549;
+      --bg-nav-active: rgba(59, 130, 246, 0.18);
+      --bg-badge: #334155;
+
+      --border-default: #334155;
+      --border-subtle: #273549;
+      --border-input: #475569;
+
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-placeholder: #64748b;
+      --text-nav-active: #60a5fa;
+      --text-on-accent: #ffffff;
+
+      --accent-primary: #3b82f6;
+      --accent-hover: #2563eb;
+
+      --status-success: #4ade80;
+      --status-success-bg: rgba(34, 197, 94, 0.16);
+      --status-danger: #f87171;
+      --status-danger-bg: rgba(239, 68, 68, 0.16);
+      --status-warning: #fbbf24;
+      --status-warning-bg: rgba(245, 158, 11, 0.16);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================================================
+       RESET E LAYOUT SPA
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-app);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-default);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand-box {
+      padding: 0 12px 20px 12px;
+      border-bottom: 1px solid var(--border-default);
+      margin-bottom: 18px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .nav-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-placeholder);
+      padding: 8px 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      text-align: left;
+      width: 100%;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .nav-btn.active {
+      background-color: var(--bg-nav-active);
+      color: var(--text-nav-active);
+      font-weight: 700;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-default);
+    }
+
+    /* ÁREA PRINCIPAL */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      height: 65px;
+      background-color: var(--bg-topbar);
+      border-bottom: 1px solid var(--border-default);
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-global {
+      width: 340px;
+      height: 36px;
+      padding: 0 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .search-global:focus {
+      background-color: var(--bg-input-focused);
+      border-color: var(--accent-primary);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--bg-hover);
+      border-color: var(--border-default);
+      color: var(--text-primary);
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 28px;
+      background-color: var(--border-default);
+    }
+
+    .profile-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: var(--accent-primary);
+      color: var(--text-on-accent);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .user-role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       CONTEÚDO DA ABA: VENDAS & DEVOLUÇÕES
+       ========================================================================== */
+    .content-area {
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: var(--text-on-accent);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--border-input);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .btn-danger-outline {
+      background-color: var(--bg-card);
+      color: var(--status-danger);
+      border-color: var(--border-input);
+    }
+
+    .btn-danger-outline:hover {
+      background-color: var(--status-danger-bg);
+      border-color: var(--status-danger);
+    }
+
+    /* KPIS DE VENDAS & DEVOLUÇÕES */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .kpi-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 6px;
+    }
+
+    .kpi-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .text-success { color: var(--status-success); }
+    .text-danger { color: var(--status-danger); }
+
+    /* BARRA DE FILTROS E ABAS */
+    .filter-bar {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .segmented-tabs {
+      display: inline-flex;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: 6px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .tab-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 4px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .input-field, .select-field {
+      height: 36px;
+      padding: 0 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .input-field {
+      width: 280px;
+    }
+
+    .input-field:focus, .select-field:focus {
+      background-color: var(--bg-input-focused);
+      border-color: var(--accent-primary);
+    }
+
+    /* TABELA DE MOVIMENTAÇÕES */
+    .table-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background-color: var(--bg-sidebar);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-default);
+    }
+
+    tbody td {
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .code-badge {
+      font-family: "Consolas", monospace;
+      font-weight: 700;
+      font-size: 12px;
+      background-color: var(--bg-badge);
+      padding: 3px 7px;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .item-sub {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* PÍLULAS DE TIPO / SITUAÇÃO */
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .pill-venda {
+      background-color: var(--status-success-bg);
+      color: var(--status-success);
+    }
+
+    .pill-devolucao {
+      background-color: var(--status-danger-bg);
+      color: var(--status-danger);
+    }
+
+    .pill-parcial {
+      background-color: var(--status-warning-bg);
+      color: var(--status-warning);
+    }
+
+    /* MENU DE RETICÊNCIAS (...) */
+    .action-cell {
+      position: relative;
+      text-align: center;
+      width: 72px;
+    }
+
+    .dots-btn {
+      width: 32px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .dots-btn:hover {
+      background-color: var(--bg-hover);
+      border-color: var(--border-default);
+      color: var(--text-primary);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      right: 16px;
+      top: 42px;
+      width: 185px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      padding: 6px;
+      z-index: 20;
+      display: none;
+      text-align: left;
+    }
+
+    .dropdown-menu.open {
+      display: block;
+    }
+
+    .dropdown-item {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .dropdown-item.danger {
+      color: var(--status-danger);
+      font-weight: 700;
+    }
+
+    .dropdown-item.danger:hover {
+      background-color: var(--status-danger-bg);
+    }
+
+    /* ==========================================================================
+       MODAIS (NOVA VENDA / REGISTRAR DEVOLUÇÃO / DETALHES)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 540px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-primary);
+      background-color: var(--bg-input-focused);
+    }
+
+    .summary-box {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-footer {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border-default);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    @media (max-width: 960px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR SPA -->
+  <aside class="sidebar">
+    <div class="brand-box">
+      <div class="brand-title">Bestand</div>
+      <div class="brand-subtitle">Gestão de Estoque</div>
+    </div>
+
+    <div class="nav-section-label">OPERAÇÕES</div>
+    <nav class="nav-list">
+      <button class="nav-btn">Visão geral</button>
+      <button class="nav-btn">Produtos</button>
+      <button class="nav-btn active">Vendas &amp; Devoluções</button>
+      <button class="nav-btn">Carregamentos</button>
+      <button class="nav-btn">Receitas &amp; Análises</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-btn">Configurações</button>
+    </div>
+  </aside>
+
+  <!-- ÁREA DIREITA -->
+  <div class="main-wrapper">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <input type="text" class="search-global" placeholder="Buscar produto por nome ou código..." />
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="btnToggleTheme" title="Alternar tema claro/escuro" aria-label="Alternar tema">
+          <svg id="iconTheme" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <div class="divider-v"></div>
+
+        <div class="profile-box">
+          <div class="avatar">AD</div>
+          <div>
+            <div class="user-name">admin</div>
+            <div class="user-role">Administrador</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL: VENDAS & DEVOLUÇÕES -->
+    <main class="content-area">
+      <!-- CABEÇALHO -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Vendas &amp; Devoluções</h1>
+          <p class="page-subtitle">Registre saídas de estoque, consulte o histórico e processe estornos (UC007 – UC008)</p>
+        </div>
+
+        <div class="header-buttons">
+          <button class="btn btn-danger-outline" onclick="abrirModalDevolucao()">↩ Registrar Devolução</button>
+          <button class="btn btn-primary" onclick="abrirModalVenda()">+ Nova Venda</button>
+        </div>
+      </div>
+
+      <!-- CARDS DE RESUMO (KPIS) -->
+      <section class="kpi-grid">
+        <div class="card">
+          <div class="kpi-label">Faturamento bruto (mês)</div>
+          <div class="kpi-value" id="kpiBruto">R$ 15.690,00</div>
+          <div class="kpi-meta">42 vendas concluídas</div>
+        </div>
+
+        <div class="card">
+          <div class="kpi-label">Total devolvido / estornado</div>
+          <div class="kpi-value text-danger" id="kpiDevolvido">R$ 870,00</div>
+          <div class="kpi-meta">3 devoluções registradas</div>
+        </div>
+
+        <div class="card">
+          <div class="kpi-label">Receita líquida</div>
+          <div class="kpi-value text-success" id="kpiLiquido">R$ 14.820,00</div>
+          <div class="kpi-meta">Bruto menos devoluções</div>
+        </div>
+
+        <div class="card">
+          <div class="kpi-label">Itens movimentados</div>
+          <div class="kpi-value" id="kpiItens">118 un.</div>
+          <div class="kpi-meta">Ticket médio: R$ 373,57</div>
+        </div>
+      </section>
+
+      <!-- FILTROS E ABAS DE TIPO -->
+      <section class="filter-bar">
+        <div class="segmented-tabs">
+          <button class="tab-btn active" data-filter="TODOS" onclick="filtrarPorTipo(this, 'TODOS')">Todos</button>
+          <button class="tab-btn" data-filter="Venda" onclick="filtrarPorTipo(this, 'Venda')">Vendas</button>
+          <button class="tab-btn" data-filter="Devolução" onclick="filtrarPorTipo(this, 'Devolução')">Devoluções</button>
+        </div>
+
+        <div class="filter-controls">
+          <input type="text" id="inputBusca" class="input-field" placeholder="Buscar por código (#VND), produto ou operador..." oninput="renderizarTabela()" />
+          <select id="selectOrdem" class="select-field" onchange="renderizarTabela()">
+            <option value="RECENTES">Mais recentes primeiro</option>
+            <option value="VALOR_DESC">Maior valor</option>
+            <option value="VALOR_ASC">Menor valor</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- TABELA DE HISTÓRICO -->
+      <section class="card table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Tipo</th>
+              <th>Produto / Resumo</th>
+              <th>Qtd.</th>
+              <th>Data &amp; Hora</th>
+              <th>Responsável</th>
+              <th>Valor Total</th>
+              <th style="text-align: center;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyMovimentacoes"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: NOVA VENDA (UC007)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalVenda">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title">Registrar Nova Venda</span>
+        <button class="icon-btn" onclick="fecharModais()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="vendaProduto">Produto</label>
+          <select id="vendaProduto" onchange="atualizarTotalVenda()">
+            <option value="Teclado Mecânico RGB|289.90|34">Teclado Mecânico RGB — R$ 289,90 (34 un. disponíveis)</option>
+            <option value="Mouse Sem Fio Ergonômico|149.50|6">Mouse Sem Fio Ergonômico — R$ 149,50 (6 un. disponíveis)</option>
+            <option value="Headset USB com Microfone|179.00|18">Headset USB com Microfone — R$ 179,00 (18 un. disponíveis)</option>
+            <option value="Cabo HDMI 2.1 Ultra HD 2m|45.00|52">Cabo HDMI 2.1 Ultra HD 2m — R$ 45,00 (52 un. disponíveis)</option>
+            <option value="Webcam Full HD 1080p|220.00|4">Webcam Full HD 1080p — R$ 220,00 (4 un. disponíveis)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vendaQtd">Quantidade</label>
+            <input type="number" id="vendaQtd" min="1" value="1" oninput="atualizarTotalVenda()" />
+          </div>
+          <div class="form-group">
+            <label for="vendaPagamento">Forma de Pagamento</label>
+            <select id="vendaPagamento">
+              <option>PIX</option>
+              <option>Cartão de Crédito</option>
+              <option>Cartão de Débito</option>
+              <option>Dinheiro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <span style="font-size: 13px; color: var(--text-secondary);">Total da venda (baixa automática no estoque):</span>
+          <strong style="font-size: 18px; color: var(--status-success);" id="previewTotalVenda">R$ 289,90</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="fecharModais()">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarNovaVenda()">Confirmar Venda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: REGISTRAR DEVOLUÇÃO (UC008)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalDevolucao">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title">Registrar Devolução de Venda</span>
+        <button class="icon-btn" onclick="fecharModais()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="devVendaRef">Venda de Referência</label>
+            <select id="devVendaRef"></select>
+          </div>
+          <div class="form-group">
+            <label for="devQtd">Qtd. Devolvida</label>
+            <input type="number" id="devQtd" min="1" value="1" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="devDestino">Destino no Estoque</label>
+          <select id="devDestino">
+            <option value="REINTEGRAR">Retornar item ao estoque disponível</option>
+            <option value="AVARIA">Item avariado / defeito (não retornar ao saldo)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="devMotivo">Motivo da Devolução</label>
+          <textarea id="devMotivo" rows="2" placeholder="Ex.: Produto com defeito de fábrica ou desistência dentro do prazo..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="fecharModais()">Cancelar</button>
+        <button class="btn btn-danger-outline" onclick="salvarDevolucao()">Confirmar Estorno</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const movimentacoes = [
+      { id: "#VND-1042", tipo: "Venda", produto: "Teclado Mecânico RGB", detalhe: "Pagamento via PIX", qtd: 2, data: "19/11/2026 09:15", responsavel: "admin", valor: 579.80, status: "Concluída" },
+      { id: "#DEV-0019", tipo: "Devolução", produto: "Mouse Sem Fio Ergonômico", detalhe: "Ref. #VND-1039 • Retornou ao estoque", qtd: 1, data: "18/11/2026 17:40", responsavel: "operador", valor: 149.50, status: "Estornada" },
+      { id: "#VND-1041", tipo: "Venda", produto: "Headset USB com Microfone", detalhe: "Cartão de Crédito (2x)", qtd: 1, data: "18/11/2026 15:22", responsavel: "operador", valor: 179.00, status: "Concluída" },
+      { id: "#VND-1040", tipo: "Venda", produto: "Webcam Full HD 1080p", detalhe: "Pagamento via PIX", qtd: 2, data: "18/11/2026 11:05", responsavel: "admin", valor: 440.00, status: "Parcialmente devolvida" },
+      { id: "#VND-1039", tipo: "Venda", produto: "Mouse Sem Fio Ergonômico", detalhe: "Cartão de Débito", qtd: 3, data: "17/11/2026 16:48", responsavel: "admin", valor: 448.50, status: "Concluída" },
+      { id: "#DEV-0018", tipo: "Devolução", produto: "Cabo HDMI 2.1 Ultra HD 2m", detalhe: "Ref. #VND-1035 • Avaria relatada", qtd: 2, data: "17/11/2026 10:12", responsavel: "admin", valor: 90.00, status: "Estornada" }
+    ];
+
+    let filtroTipoAtual = "TODOS";
+
+    function formatarMoeda(v) {
+      return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+
+    function filtrarPorTipo(btn, tipo) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      filtroTipoAtual = tipo;
+      renderizarTabela();
+    }
+
+    function renderizarTabela() {
+      const busca = document.getElementById("inputBusca").value.trim().toLowerCase();
+      const ordem = document.getElementById("selectOrdem").value;
+
+      let lista = movimentacoes.filter(item => {
+        const bateTipo = filtroTipoAtual === "TODOS" || item.tipo === filtroTipoAtual;
+        const bateTexto = !busca ||
+          item.id.toLowerCase().includes(busca) ||
+          item.produto.toLowerCase().includes(busca) ||
+          item.responsavel.toLowerCase().includes(busca);
+        return bateTipo && bateTexto;
+      });
+
+      if (ordem === "VALOR_DESC") {
+        lista = [...lista].sort((a, b) => b.valor - a.valor);
+      } else if (ordem === "VALOR_ASC") {
+        lista = [...lista].sort((a, b) => a.valor - b.valor);
+      }
+
+      const tbody = document.getElementById("tbodyMovimentacoes");
+      tbody.innerHTML = lista.map((item, idx) => {
+        const isVenda = item.tipo === "Venda";
+        const pillClass = item.status === "Parcialmente devolvida"
+          ? "pill-parcial"
+          : (isVenda ? "pill-venda" : "pill-devolucao");
+        const sinal = isVenda ? "" : "- ";
+        const valorClass = isVenda ? "" : "text-danger";
+
+        return `
+          <tr>
+            <td><span class="code-badge">${item.id}</span></td>
+            <td><span class="pill ${pillClass}">${isVenda ? item.status : "Devolução"}</span></td>
+            <td>
+              <strong>${item.produto}</strong>
+              <span class="item-sub">${item.detalhe}</span>
+            </td>
+            <td>${item.qtd} un.</td>
+            <td>${item.data}</td>
+            <td>${item.responsavel}</td>
+            <td class="${valorClass}"><strong>${sinal}${formatarMoeda(item.valor)}</strong></td>
+            <td class="action-cell">
+              <button class="dots-btn" onclick="toggleDropdown(event, ${idx})">...</button>
+              <div class="dropdown-menu" id="drop-${idx}">
+                <button class="dropdown-item" onclick="verDetalhes('${item.id}')">Ver detalhes</button>
+                ${isVenda ? `<button class="dropdown-item danger" onclick="abrirModalDevolucao('${item.id}')">Devolver itens</button>` : ""}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function toggleDropdown(e, idx) {
+      e.stopPropagation();
+      const target = document.getElementById(`drop-${idx}`);
+      const wasOpen = target.classList.contains("open");
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("open"));
+      if (!wasOpen) target.classList.add("open");
+    }
+
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("open"));
+    });
+
+    function abrirModalVenda() {
+      atualizarTotalVenda();
+      document.getElementById("modalVenda").classList.add("open");
+    }
+
+    function atualizarTotalVenda() {
+      const [, preco] = document.getElementById("vendaProduto").value.split("|");
+      const qtd = Math.max(1, parseInt(document.getElementById("vendaQtd").value || "1", 10));
+      document.getElementById("previewTotalVenda").textContent = formatarMoeda(parseFloat(preco) * qtd);
+    }
+
+    function salvarNovaVenda() {
+      const [nome, preco] = document.getElementById("vendaProduto").value.split("|");
+      const qtd = Math.max(1, parseInt(document.getElementById("vendaQtd").value || "1", 10));
+      const pag = document.getElementById("vendaPagamento").value;
+      const novoCodigo = `#VND-${1043 + movimentacoes.length}`;
+
+      movimentacoes.unshift({
+        id: novoCodigo,
+        tipo: "Venda",
+        produto: nome,
+        detalhe: `Pagamento via ${pag}`,
+        qtd,
+        data: "19/11/2026 09:37",
+        responsavel: "admin",
+        valor: parseFloat(preco) * qtd,
+        status: "Concluída"
+      });
+
+      fecharModais();
+      renderizarTabela();
+    }
+
+    function abrirModalDevolucao(vendaIdSelecionada) {
+      const select = document.getElementById("devVendaRef");
+      const vendas = movimentacoes.filter(m => m.tipo === "Venda");
+      select.innerHTML = vendas.map(v =>
+        `<option value="${v.id}|${v.produto}|${(v.valor / v.qtd).toFixed(2)}" ${v.id === vendaIdSelecionada ? "selected" : ""}>${v.id} — ${v.produto} (${v.qtd} un.)</option>`
+      ).join("");
+      document.getElementById("modalDevolucao").classList.add("open");
+    }
+
+    function salvarDevolucao() {
+      const [refId, produto, unitario] = document.getElementById("devVendaRef").value.split("|");
+      const qtd = Math.max(1, parseInt(document.getElementById("devQtd").value || "1", 10));
+      const destino = document.getElementById("devDestino").value === "REINTEGRAR"
+        ? "Retornou ao estoque"
+        : "Avaria relatada";
+
+      movimentacoes.unshift({
+        id: `#DEV-00${20 + movimentacoes.length}`,
+        tipo: "Devolução",
+        produto,
+        detalhe: `Ref. ${refId} • ${destino}`,
+        qtd,
+        data: "19/11/2026 09:37",
+        responsavel: "admin",
+        valor: parseFloat(unitario) * qtd,
+        status: "Estornada"
+      });
+
+      fecharModais();
+      renderizarTabela();
+    }
+
+    function verDetalhes(id) {
+      const item = movimentacoes.find(m => m.id === id);
+      if (item) {
+        alert(`${item.tipo} ${item.id}\nProduto: ${item.produto}\nQuantidade: ${item.qtd} un.\nValor: ${formatarMoeda(item.valor)}\nDetalhe: ${item.detalhe}`);
+      }
+    }
+
+    function fecharModais() {
+      document.querySelectorAll(".modal-backdrop").forEach(m => m.classList.remove("open"));
+    }
+
+    // Alternância de tema claro / escuro no protótipo
+    document.getElementById("btnToggleTheme").addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    renderizarTabela();
+  </script>
+</body>
+</html>

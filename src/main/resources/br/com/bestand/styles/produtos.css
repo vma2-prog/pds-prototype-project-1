@@ -1,0 +1,162 @@
+/* ==========================================================================
+   TELA DE PRODUTOS (produtos-view.fxml)
+   ========================================================================== */
+.produtos-container {
+    -fx-padding: 28 30 28 30;
+    -fx-background-color: -bg-app;
+}
+
+/* BARRA DE FILTROS E ORDENAÇÃO */
+.filter-bar {
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12 16 12 16;
+}
+
+.filter-input {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 12 0 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.filter-input:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+.filter-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-secondary;
+}
+
+.filter-combo {
+    -fx-pref-height: 36px;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.filter-combo:hover {
+    -fx-border-color: -accent-primary;
+}
+
+.filter-combo .list-cell {
+    -fx-text-fill: -text-primary;
+    -fx-background-color: transparent;
+}
+
+.filter-combo .arrow-button .arrow {
+    -fx-background-color: -text-muted;
+}
+
+.filter-combo-popup .list-view {
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+}
+
+.filter-combo-popup .list-cell {
+    -fx-background-color: -bg-card;
+    -fx-text-fill: -text-primary;
+    -fx-padding: 8 12 8 12;
+}
+
+.filter-combo-popup .list-cell:hover,
+.filter-combo-popup .list-cell:selected {
+    -fx-background-color: -bg-hover;
+}
+
+/* CARD DA TABELA */
+.table-card {
+    -fx-padding: 0;
+}
+
+.produtos-table {
+    -fx-border-color: transparent;
+}
+
+.produtos-table .table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 14 12 14;
+}
+
+.produtos-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 4 6 4 6;
+}
+
+/* INFORMAÇÃO DO PRODUTO (NOME + CÓDIGO) */
+.produto-nome {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.produto-codigo {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+/* PÍLULAS DE SITUAÇÃO DE ESTOQUE */
+.status-pill {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 12;
+}
+
+.status-normal {
+    -fx-background-color: -status-success-bg;
+    -fx-text-fill: -status-success;
+}
+
+.status-baixo {
+    -fx-background-color: rgba(230, 126, 34, 0.16);
+    -fx-text-fill: -status-warning;
+}
+
+.status-zerado {
+    -fx-background-color: -status-danger-bg;
+    -fx-text-fill: -status-danger;
+}
+
+/* BOTÃO DE RETICÊNCIAS (AÇÕES) */
+.action-dots-btn {
+    -fx-pref-width: 32px;
+    -fx-pref-height: 28px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -text-secondary;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 4 0;
+    -fx-cursor: hand;
+}
+
+.action-dots-btn:hover {
+    -fx-background-color: -bg-hover;
+    -fx-border-color: -border-default;
+    -fx-text-fill: -text-primary;
+}
+
+.menu-item-edit .label {
+    -fx-text-fill: -text-primary;
+    -fx-font-size: 13px;
+}
+
+.menu-item-edit:focused {
+    -fx-background-color: -bg-hover;
+}

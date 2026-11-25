@@ -1,0 +1,46 @@
+/* ==========================================================================
+   TEMA ESCURO (DARK THEME) - BESTAND
+   ========================================================================== */
+.root {
+    /* Fundos principais */
+    -bg-app: #12161c;
+    -bg-sidebar: #161b22;
+    -bg-topbar: #161b22;
+    -bg-card: #1c222b;
+    -bg-input: #12161c;
+    -bg-input-focused: #1c222b;
+    -bg-hover: #242b35;
+    -bg-nav-hover: #21262d;
+    -bg-nav-active: rgba(52, 152, 219, 0.18);
+    -bg-badge: #242b35;
+
+    /* Bordas e divisores */
+    -border-default: #2d333b;
+    -border-input: #373e47;
+    -border-subtle: #242b35;
+
+    /* Textos */
+    -text-primary: #e6edf3;
+    -text-secondary: #adbac7;
+    -text-muted: #8b949e;
+    -text-placeholder: #6e7681;
+    -text-nav-active: #58a6ff;
+    -text-on-accent: #ffffff;
+
+    /* Cores de destaque (Accent) */
+    -accent-primary: #3498db;
+    -accent-hover: #4aa3df;
+    -accent-pressed: #2980b9;
+
+    /* Status e alertas */
+    -status-success: #3fb950;
+    -status-success-bg: rgba(63, 185, 80, 0.15);
+    -status-warning: #f0883e;
+    -status-danger: #f85149;
+    -status-danger-hover: #ff7b72;
+    -status-danger-bg: rgba(248, 81, 73, 0.15);
+    -status-danger-border: rgba(248, 81, 73, 0.4);
+
+    /* Sombras */
+    -shadow-color: rgba(0, 0, 0, 0.35);
+}

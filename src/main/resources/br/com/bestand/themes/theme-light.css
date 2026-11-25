@@ -1,0 +1,46 @@
+/* ==========================================================================
+   TEMA CLARO (LIGHT THEME) - BESTAND
+   ========================================================================== */
+.root {
+    /* Fundos principais */
+    -bg-app: #fafbfc;
+    -bg-sidebar: #f4f5f7;
+    -bg-topbar: #ffffff;
+    -bg-card: #ffffff;
+    -bg-input: #f8f9fa;
+    -bg-input-focused: #ffffff;
+    -bg-hover: #f4f5f7;
+    -bg-nav-hover: #e9ecef;
+    -bg-nav-active: #e1effe;
+    -bg-badge: #f4f5f7;
+
+    /* Bordas e divisores */
+    -border-default: #e1e4e8;
+    -border-input: #dcdde1;
+    -border-subtle: #f0f2f5;
+
+    /* Textos */
+    -text-primary: #2c3e50;
+    -text-secondary: #5f6c7b;
+    -text-muted: #7f8c8d;
+    -text-placeholder: #95a5a6;
+    -text-nav-active: #1a56db;
+    -text-on-accent: #ffffff;
+
+    /* Cores de destaque (Accent) */
+    -accent-primary: #3498db;
+    -accent-hover: #2980b9;
+    -accent-pressed: #2471a3;
+
+    /* Status e alertas */
+    -status-success: #27ae60;
+    -status-success-bg: #eafaf1;
+    -status-warning: #e67e22;
+    -status-danger: #e74c3c;
+    -status-danger-hover: #c0392b;
+    -status-danger-bg: #fdecea;
+    -status-danger-border: #f5c6cb;
+
+    /* Sombras */
+    -shadow-color: rgba(44, 62, 80, 0.06);
+}

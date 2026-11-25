@@ -1,0 +1,265 @@
+/* ==========================================================================
+   ESTILOS GLOBAIS COMPARTILHADOS - BESTAND
+   ========================================================================== */
+.root {
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-background-color: -bg-app;
+}
+
+/* LABELS E TEXTOS DE CABEÇALHO */
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.page-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-muted;
+}
+
+.section-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.kpi-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+
+.kpi-value {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.kpi-caption,
+.section-caption {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.kpi-danger,
+.result-negative {
+    -fx-text-fill: -status-danger;
+}
+
+.result-status {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.result-positive {
+    -fx-text-fill: -status-success;
+}
+
+.result-neutral {
+    -fx-text-fill: -status-warning;
+}
+
+/* FORMULÁRIOS E CAMPOS */
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.form-input {
+    -fx-pref-height: 40px;
+    -fx-padding: 0 12 0 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.form-input:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+/* BOTÕES */
+.btn-primary {
+    -fx-pref-height: 42px;
+    -fx-background-color: -accent-primary;
+    -fx-text-fill: -text-on-accent;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -accent-hover;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: -accent-pressed;
+}
+
+.btn-primary-compact {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 16 0 16;
+    -fx-background-color: -accent-primary;
+    -fx-text-fill: -text-on-accent;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary-compact:hover {
+    -fx-background-color: -accent-hover;
+}
+
+.btn-secondary {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 14 0 14;
+    -fx-background-color: -bg-card;
+    -fx-text-fill: -text-primary;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -bg-hover;
+}
+
+/* ALERTAS E CARDS */
+.error-banner {
+    -fx-background-color: -status-danger-bg;
+    -fx-border-color: -status-danger-border;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -status-danger;
+    -fx-font-size: 12px;
+    -fx-padding: 10 12 10 12;
+}
+
+.card {
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 18 20 18 20;
+}
+
+.placeholder-card {
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-input;
+    -fx-border-style: dashed;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 48 24 48 24;
+}
+
+.module-content {
+    -fx-padding: 26 28 30 28;
+    -fx-background-color: -bg-app;
+}
+
+.memory-notice {
+    -fx-font-size: 11px;
+    -fx-text-fill: -status-warning;
+}
+
+.section-caption {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+.module-input,
+.module-combo,
+.period-card .date-picker {
+    -fx-pref-height: 38px;
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.module-input {
+    -fx-padding: 0 10 0 10;
+}
+
+.module-input:focused,
+.module-combo:focused,
+.period-card .date-picker:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+.module-combo .list-cell {
+    -fx-text-fill: -text-primary;
+    -fx-background-color: transparent;
+}
+
+.module-combo-popup .list-view,
+.module-combo-popup .list-cell {
+    -fx-background-color: -bg-card;
+    -fx-text-fill: -text-primary;
+}
+
+.period-card {
+    -fx-padding: 12 16 12 16;
+}
+
+.report-card {
+    -fx-min-height: 112px;
+}
+
+/* ÍCONE DE TEMA */
+.theme-icon {
+    -fx-fill: -text-secondary;
+}
+
+/* TABELAS PADRÃO */
+.data-table {
+    -fx-background-color: transparent;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 6;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: -bg-sidebar;
+}
+
+.data-table .column-header,
+.data-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -border-default transparent;
+}
+
+.data-table .column-header .label {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.data-table .table-row-cell {
+    -fx-background-color: -bg-card;
+    -fx-border-color: transparent transparent -border-subtle transparent;
+}
+
+.data-table .table-row-cell:hover {
+    -fx-background-color: -bg-hover;
+}
+
+.data-table .table-cell {
+    -fx-text-fill: -text-primary;
+    -fx-font-size: 13px;
+    -fx-padding: 10 8 10 8;
+}

@@ -1,120 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.MainController">
+<BorderPane stylesheets="@styles/main-layout.css" prefHeight="700.0" prefWidth="1100.0" styleClass="app-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.MainController">
 
-    <!-- MENU LATERAL ESQUERDO -->
+    <!-- MENU LATERAL ESQUERDO (SIDEBAR) -->
     <left>
-        <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #f4f5f7; -fx-padding: 20; -fx-border-color: #e1e4e8; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+        <VBox prefWidth="240.0" styleClass="sidebar">
             <children>
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Bestand" />
-                
-                <VBox spacing="10.0" style="-fx-padding: 20 0 0 0;">
+                <!-- MARCA -->
+                <VBox spacing="2.0" styleClass="brand-box">
                     <children>
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #3498db; -fx-font-weight: bold;" text="Visão geral" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Produtos" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Categorias" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Estoque" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Movimentos" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Fornecedores" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Relatórios &amp; análises" />
+                        <Label styleClass="brand-title" text="Bestand" />
+                        <Label styleClass="brand-subtitle" text="Gestão de Estoque" />
                     </children>
                 </VBox>
-                
-                <!-- Espaçador para empurrar as configurações para baixo -->
-                <VBox VBox.vgrow="ALWAYS" />
-                
-                <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" text="Configurações" />
+
+                <!-- SEÇÃO DE NAVEGAÇÃO -->
+                <Label styleClass="nav-section-label" text="OPERAÇÕES" />
+
+                <VBox spacing="4.0">
+                    <children>
+                        <Button fx:id="btnNavDashboard" maxWidth="Infinity" onAction="#onNavDashboard" styleClass="nav-btn, nav-btn-active" text="Visão geral">
+                            <tooltip><Tooltip text="Resumo do estoque e das movimentações da loja" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavProdutos" maxWidth="Infinity" onAction="#onNavProdutos" styleClass="nav-btn" text="Produtos">
+                            <tooltip><Tooltip text="Consulte e gerencie os produtos cadastrados" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavVendas" maxWidth="Infinity" onAction="#onNavVendas" styleClass="nav-btn" text="Vendas &amp; Devoluções">
+                            <tooltip><Tooltip text="Acesse os registros de vendas e estornos" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavCarregamentos" maxWidth="Infinity" onAction="#onNavCarregamentos" styleClass="nav-btn" text="Carregamentos">
+                            <tooltip><Tooltip text="Acesse as entradas e reposições de mercadorias" /></tooltip>
+                        </Button>
+                        <Button fx:id="btnNavReceitas" maxWidth="Infinity" onAction="#onNavReceitas" styleClass="nav-btn" text="Receitas &amp; Análises">
+                            <tooltip><Tooltip text="Consulte relatórios e análises financeiras" /></tooltip>
+                        </Button>
+                    </children>
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <!-- RODAPÉ DA BARRA LATERAL (CONFIGURAÇÕES) -->
+                <VBox styleClass="sidebar-footer">
+                    <children>
+                        <Button fx:id="btnNavConfiguracoes" maxWidth="Infinity" onAction="#onNavConfiguracoes" styleClass="nav-btn" text="Configurações">
+                            <graphic>
+                                <SVGPath content="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.4 0a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" scaleX="0.7" scaleY="0.7" styleClass="nav-icon" />
+                            </graphic>
+                            <tooltip><Tooltip text="Gerencie perfis de usuário e preferências" /></tooltip>
+                        </Button>
+                    </children>
+                </VBox>
             </children>
         </VBox>
     </left>
 
-    <!-- CONTEÚDO CENTRAL E TOPO -->
+    <!-- ÁREA DIREITA (BARRA SUPERIOR + CONTAINER SPA) -->
     <center>
-        <VBox BorderPane.alignment="CENTER">
+        <VBox styleClass="main-wrapper">
             <children>
                 <!-- BARRA SUPERIOR -->
-                <HBox alignment="CENTER_LEFT" prefHeight="65.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: #e1e4e8; -fx-border-width: 0 0 1 0; -fx-padding: 0 30;">
+                <HBox alignment="CENTER_LEFT" prefHeight="65.0" styleClass="topbar">
                     <children>
-                        <TextField fx:id="txtBuscar" onAction="#onBuscarProdutos" prefHeight="32.0" prefWidth="350.0" promptText="Buscar produtos..." style="-fx-background-radius: 5; -fx-border-color: #dcdde1; -fx-border-radius: 5;" />
-                        
-                        <HBox HBox.hgrow="ALWAYS" />
-                        
-                        <!-- Perfil com ícone (círculo) e nome -->
-                        <HBox alignment="CENTER" spacing="10.0">
+                        <TextField fx:id="txtBuscaGlobal" onAction="#onBuscaGlobal" prefWidth="340.0" promptText="Buscar produto por nome ou código..." styleClass="search-input" />
+
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <!-- CONTROLES DA DIREITA -->
+                        <HBox alignment="CENTER" spacing="14.0">
                             <children>
-                                <Circle radius="16.0" fill="#bdc3c7" />
-                                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Admin" />
+                                <!-- BOTÃO DE TEMA (À ESQUERDA DO SEPARADOR) -->
+                                <Button fx:id="btnTema" onAction="#onAlternarTema" styleClass="topbar-icon-btn">
+                                    <graphic>
+                                        <SVGPath fx:id="svgIconeTema" content="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" styleClass="theme-icon" />
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Alternar tema claro/escuro" />
+                                    </tooltip>
+                                </Button>
+
+                                <!-- SEPARADOR VERTICAL -->
+                                <Separator orientation="VERTICAL" prefHeight="28.0" styleClass="topbar-divider" />
+
+                                <!-- BOTÃO DE PERFIL COM DROPDOWN "SAIR" -->
+                                <MenuButton fx:id="menuPerfil" styleClass="profile-menu-btn">
+                                    <graphic>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Label fx:id="lblAvatarIniciais" alignment="CENTER" styleClass="user-avatar" text="AD" />
+                                                <VBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label fx:id="lblUsuarioNome" styleClass="user-name" text="admin" />
+                                                        <Label fx:id="lblUsuarioCargo" styleClass="user-role" text="Administrador" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </graphic>
+                                    <items>
+                                        <MenuItem onAction="#onSair" styleClass="menu-item-danger" text="Sair do sistema" />
+                                    </items>
+                                </MenuButton>
                             </children>
                         </HBox>
                     </children>
                 </HBox>
 
-                <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
-                <VBox spacing="25.0" style="-fx-padding: 25; -fx-background-color: #fafbfc;" VBox.vgrow="ALWAYS">
-                    <children>
-                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Visão geral" />
-
-                        <!-- CARDS DE INDICADORES (MÉTRICAS) -->
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #e1e4e8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" text="Produtos cadastrados" />
-                                        <Label fx:id="lblTotalProdutos" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="0" />
-                                    </children>
-                                </VBox>
-                                
-                                <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #e1e4e8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" text="Units. em estoque" />
-                                        <Label fx:id="lblUnitsEstoque" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="0" />
-                                    </children>
-                                </VBox>
-                                
-                                <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #e1e4e8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" text="Estoque baixo" />
-                                        <Label fx:id="lblEstoqueBaixo" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #e67e22;" text="0" />
-                                    </children>
-                                </VBox>
-                                
-                                <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #e1e4e8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" text="Sem estoque" />
-                                        <Label fx:id="lblSemEstoque" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" text="0" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <!-- SEÇÃO DE GRÁFICO (TENDÊNCIA) -->
-                        <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-border-color: #e1e4e8; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
-                            <children>
-                                <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Tendência" />
-                                
-                                <BarChart fx:id="chartTendencia" legendVisible="false" VBox.vgrow="ALWAYS">
-                                    <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                    </xAxis>
-                                    <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                    </yAxis>
-                                </BarChart>
-                            </children>
-                        </VBox>
-                    </children>
-                </VBox>
+                <!-- OUTLET DINÂMICO (ONDE AS SUBTELAS SÃO CARREGADAS) -->
+                <StackPane fx:id="spaOutlet" styleClass="spa-outlet" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>
     </center>

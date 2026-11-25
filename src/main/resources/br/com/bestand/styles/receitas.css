@@ -1,0 +1,41 @@
+.finance-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.finance-chart .chart-vertical-grid-lines,
+.finance-chart .chart-horizontal-grid-lines {
+    -fx-stroke: -border-subtle;
+}
+
+.finance-chart .axis {
+    -fx-tick-label-fill: -text-muted;
+    -fx-tick-label-font-size: 10px;
+}
+
+.finance-chart .axis-label {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 11px;
+}
+
+.finance-chart .chart-legend {
+    -fx-background-color: transparent;
+}
+
+.finance-chart .chart-legend-item {
+    -fx-text-fill: -text-secondary;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: -accent-primary;
+    -fx-stroke-width: 2.5px;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: -status-danger;
+    -fx-stroke-width: 2.5px;
+}
+
+.default-color2.chart-series-line {
+    -fx-stroke: -status-warning;
+    -fx-stroke-width: 2.5px;
+}

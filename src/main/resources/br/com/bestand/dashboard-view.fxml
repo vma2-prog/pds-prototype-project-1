@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane stylesheets="@styles/dashboard.css" fitToWidth="true" styleClass="content-scroll" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bestand.DashboardController">
+    <content>
+        <VBox spacing="20.0" styleClass="dashboard-content">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="16.0">
+                    <children>
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label styleClass="page-title" text="Visão geral" />
+                                <Label styleClass="page-subtitle" text="Acompanhe o estoque e as movimentações da loja em um só lugar." />
+                            </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox spacing="10.0">
+                            <children>
+                                <Button onAction="#onNovoCarregamento" styleClass="btn-secondary" text="Ver carregamentos" />
+                                <Button onAction="#onNovaVenda" styleClass="btn-primary-compact" text="Ver vendas" />
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label fx:id="lblMesReferencia" styleClass="month-label" text="Novembro de 2026" />
+                        <Label styleClass="demo-badge" text="DADOS DA SESSÃO" />
+                        <Label styleClass="section-caption" text="Os lançamentos são apagados ao fechar o aplicativo." />
+                    </children>
+                </HBox>
+
+                <HBox spacing="12.0">
+                    <children>
+                        <VBox spacing="7.0" styleClass="card, kpi-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="kpi-label" text="Produtos cadastrados" />
+                                <Label fx:id="lblTotalProdutos" styleClass="kpi-value" text="128" />
+                                <Label styleClass="kpi-caption" text="Itens disponíveis no catálogo" wrapText="true" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="7.0" styleClass="card, kpi-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="kpi-label" text="Unidades em estoque" />
+                                <Label fx:id="lblUnidadesEstoque" styleClass="kpi-value" text="1.450" />
+                                <Label styleClass="kpi-caption" text="Quantidade total disponível" wrapText="true" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="7.0" styleClass="card, kpi-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="kpi-label" text="Produtos sem estoque" />
+                                <Label fx:id="lblProdutosZerados" styleClass="kpi-value, kpi-danger" text="4" />
+                                <Label styleClass="kpi-caption" text="Itens que precisam de reposição" wrapText="true" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" styleClass="card, kpi-card, result-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="kpi-label" text="Resultado estimado do mês" />
+                                <Label fx:id="lblResultadoMes" styleClass="kpi-value" text="R$ 14.820,00" />
+                                <Label fx:id="lblEstadoResultado" styleClass="result-status, result-positive" text="Superávit estimado" />
+                                <Label fx:id="lblDetalheResultado" styleClass="kpi-caption" text="Vendas − devoluções − custo dos carregamentos. Não inclui outras despesas ou impostos." wrapText="true" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <VBox spacing="10.0" styleClass="card">
+                    <children>
+                        <Label styleClass="section-title" text="Movimentações diárias" />
+                        <Label styleClass="section-caption" text="Quantidade de registros por dia: vendas, devoluções e carregamentos. Use a legenda para comparar cada atividade." wrapText="true" />
+                        <LineChart fx:id="chartMovimentacoes" animated="false" createSymbols="false" prefHeight="330.0" styleClass="dashboard-chart">
+                            <xAxis>
+                                <CategoryAxis label="Dia do mês" side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis forceZeroInRange="true" label="Registros no dia" side="LEFT" />
+                            </yAxis>
+                        </LineChart>
+                    </children>
+                </VBox>
+
+                <VBox spacing="10.0" styleClass="card">
+                    <children>
+                        <Label styleClass="section-title" text="Atividade recente" />
+                        <Label styleClass="section-caption" text="Movimentações registradas nesta sessão, começando pelas mais recentes." wrapText="true" />
+                        <TableView fx:id="tblUltimosRegistros" prefHeight="210.0" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colTipo" prefWidth="130.0" text="Movimentação" />
+                                <TableColumn fx:id="colReferencia" prefWidth="260.0" text="Referência" />
+                                <TableColumn fx:id="colResponsavel" prefWidth="120.0" text="Responsável" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

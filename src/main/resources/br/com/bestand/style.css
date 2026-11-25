@@ -1,0 +1,133 @@
+/* ==========================================================================
+   BASE ESTRUTURAL (USA VARIÁVEIS DE theme-light.css / theme-dark.css)
+   ========================================================================== */
+.root {
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-background-color: -bg-app;
+}
+
+/* ==========================================================================
+   COMPONENTES GLOBAIS REUTILIZÁVEIS
+   ========================================================================== */
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.form-input {
+    -fx-pref-height: 40px;
+    -fx-padding: 0 12 0 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-placeholder;
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.form-input:focused {
+    -fx-background-color: -bg-input-focused;
+    -fx-border-color: -accent-primary;
+}
+
+.btn-primary {
+    -fx-pref-height: 42px;
+    -fx-background-color: -accent-primary;
+    -fx-text-fill: -text-on-accent;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -accent-hover;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: -accent-pressed;
+}
+
+.error-banner {
+    -fx-background-color: -status-danger-bg;
+    -fx-border-color: -status-danger-border;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -status-danger;
+    -fx-font-size: 12px;
+    -fx-padding: 10 12 10 12;
+}
+
+/* Botão flutuante/discreto de troca de tema */
+.theme-toggle-btn {
+    -fx-pref-width: 38px;
+    -fx-pref-height: 38px;
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, -shadow-color, 6, 0, 0, 2);
+}
+
+.theme-toggle-btn:hover {
+    -fx-background-color: -bg-hover;
+    -fx-border-color: -accent-primary;
+}
+
+.theme-icon {
+    -fx-fill: -text-secondary;
+}
+
+/* ==========================================================================
+   TELA DE LOGIN (login-view.fxml)
+   ========================================================================== */
+.login-root {
+    -fx-background-color: -bg-app;
+    -fx-padding: 24;
+}
+
+.login-card {
+    -fx-max-width: 400px;
+    -fx-pref-width: 400px;
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 40 32 40 32;
+    -fx-effect: dropshadow(three-pass-box, -shadow-color, 12, 0, 0, 4);
+}
+
+.login-brand-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.login-brand-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-muted;
+}
+
+.login-footer {
+    -fx-border-color: -border-subtle transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 16 0 0 0;
+}
+
+.login-hint-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: -text-muted;
+}
+
+.login-hint-badge {
+    -fx-background-color: -bg-badge;
+    -fx-text-fill: -text-primary;
+    -fx-font-family: "Consolas", "Monospaced", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 4;
+}
