@@ -202,15 +202,19 @@
     -fx-border-color: -accent-primary;
 }
 
-.module-combo .list-cell {
+.combo-box-popup .list-cell {
     -fx-text-fill: -text-primary;
     -fx-background-color: transparent;
 }
 
-.module-combo-popup .list-view,
-.module-combo-popup .list-cell {
+.combo-box-popup .list-view,
+.combo-box-popup .list-cell {
     -fx-background-color: -bg-card;
     -fx-text-fill: -text-primary;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -bg-combo-hover;
 }
 
 .period-card {

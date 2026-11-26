@@ -46,7 +46,7 @@ public class VendasController {
 
     private void configurarProdutos() {
         cmbProduto.setItems(loja.getProdutos());
-        cmbProduto.setCellFactory(list -> new ListCell<>() {
+        cmbProduto.setCellFactory(list -> new ListCell<LojaService.Produto>() {
             @Override
             protected void updateItem(LojaService.Produto produto, boolean empty) {
                 super.updateItem(produto, empty);
@@ -54,7 +54,7 @@ public class VendasController {
                         : produto.getNome() + " · " + moeda.format(produto.getPrecoVenda()));
             }
         });
-        cmbProduto.setButtonCell(new ListCell<>() {
+        cmbProduto.setButtonCell(new ListCell<LojaService.Produto>() {
             @Override
             protected void updateItem(LojaService.Produto produto, boolean empty) {
                 super.updateItem(produto, empty);
@@ -68,7 +68,7 @@ public class VendasController {
         vendasDisponiveis = new FilteredList<>(loja.getVendas(),
                 venda -> venda.getQuantidadeDisponivelParaDevolucao() > 0);
         cmbVendaDevolucao.setItems(vendasDisponiveis);
-        cmbVendaDevolucao.setCellFactory(list -> new ListCell<>() {
+        cmbVendaDevolucao.setCellFactory(list -> new ListCell<LojaService.Venda>() {
             @Override
             protected void updateItem(LojaService.Venda venda, boolean empty) {
                 super.updateItem(venda, empty);
@@ -77,7 +77,7 @@ public class VendasController {
                         + " · até " + venda.getQuantidadeDisponivelParaDevolucao() + " un.");
             }
         });
-        cmbVendaDevolucao.setButtonCell(new ListCell<>() {
+        cmbVendaDevolucao.setButtonCell(new ListCell<LojaService.Venda>() {
             @Override
             protected void updateItem(LojaService.Venda venda, boolean empty) {
                 super.updateItem(venda, empty);

@@ -37,7 +37,7 @@ public class CarregamentosController {
     @FXML
     public void initialize() {
         cmbProduto.setItems(loja.getProdutos());
-        cmbProduto.setCellFactory(list -> new ListCell<>() {
+        cmbProduto.setCellFactory(list -> new ListCell<LojaService.Produto>() {
             @Override
             protected void updateItem(LojaService.Produto produto, boolean empty) {
                 super.updateItem(produto, empty);
@@ -45,7 +45,7 @@ public class CarregamentosController {
                         : produto.getNome());
             }
         });
-        cmbProduto.setButtonCell(new ListCell<>() {
+        cmbProduto.setButtonCell(new ListCell<LojaService.Produto>() {
             @Override
             protected void updateItem(LojaService.Produto produto, boolean empty) {
                 super.updateItem(produto, empty);

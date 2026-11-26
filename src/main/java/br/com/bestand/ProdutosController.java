@@ -72,7 +72,7 @@ public class ProdutosController {
     private void configurarColunas() {
         // 1. Coluna Produto (Nome em destaque + Código abaixo)
         colProduto.setCellValueFactory(data -> data.getValue().nomeProperty());
-        colProduto.setCellFactory(col -> new TableCell<>() {
+        colProduto.setCellFactory(col -> new TableCell<LojaService.Produto, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -94,7 +94,7 @@ public class ProdutosController {
 
         // 2. Coluna Estoque
         colEstoque.setCellValueFactory(data -> data.getValue().estoqueProperty());
-        colEstoque.setCellFactory(col -> new TableCell<>() {
+        colEstoque.setCellFactory(col -> new TableCell<LojaService.Produto, Number>() {
             @Override
             protected void updateItem(Number item, boolean empty) {
                 super.updateItem(item, empty);
@@ -108,7 +108,7 @@ public class ProdutosController {
 
         // 3. Coluna Preço de Venda
         colPrecoVenda.setCellValueFactory(data -> data.getValue().precoVendaProperty());
-        colPrecoVenda.setCellFactory(col -> new TableCell<>() {
+        colPrecoVenda.setCellFactory(col -> new TableCell<LojaService.Produto, Number>() {
             @Override
             protected void updateItem(Number item, boolean empty) {
                 super.updateItem(item, empty);
@@ -122,7 +122,7 @@ public class ProdutosController {
 
         // 4. Coluna Situação (Estoque normal, baixo ou sem estoque)
         colSituacao.setCellValueFactory(data -> data.getValue().situacaoProperty());
-        colSituacao.setCellFactory(col -> new TableCell<>() {
+        colSituacao.setCellFactory(col -> new TableCell<LojaService.Produto, String>() {
             @Override
             protected void updateItem(String situacao, boolean empty) {
                 super.updateItem(situacao, empty);
@@ -143,7 +143,7 @@ public class ProdutosController {
         });
 
         // 5. Coluna Ações (Botão reticências "..." abrindo menu Editar / Remover)
-        colAcoes.setCellFactory(col -> new TableCell<>() {
+        colAcoes.setCellFactory(col -> new TableCell<LojaService.Produto, Void>() {
             private final Button btnDots = new Button("...");
             private final ContextMenu menuAcoes = new ContextMenu();
 
