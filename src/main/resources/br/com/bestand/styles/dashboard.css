@@ -2,18 +2,18 @@
    VISÃO GERAL / DASHBOARD (dashboard-view.fxml)
    ========================================================================== */
 .content-scroll {
-    -fx-background: -bg-app;
-    -fx-background-color: -bg-app;
+    -fx-background: transparent;
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
 .content-scroll > .viewport {
-    -fx-background-color: -bg-app;
+    -fx-background-color: transparent;
 }
 
 .dashboard-content {
     -fx-padding: 24 28 30 28;
-    -fx-background-color: -bg-app;
+    -fx-background-color: transparent;
 }
 
 .month-label {

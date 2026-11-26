@@ -165,7 +165,17 @@
 
 .module-content {
     -fx-padding: 26 28 30 28;
-    -fx-background-color: -bg-app;
+    -fx-background-color: transparent;
+}
+
+.content-scroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.content-scroll > .viewport {
+    -fx-background-color: transparent;
 }
 
 .memory-notice {

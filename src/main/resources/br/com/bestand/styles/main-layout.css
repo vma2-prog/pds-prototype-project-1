@@ -189,5 +189,5 @@
 
 /* OUTLET CENTRAL SPA */
 .spa-outlet {
-    -fx-background-color: -bg-app;
+    -fx-background-color: transparent;
 }

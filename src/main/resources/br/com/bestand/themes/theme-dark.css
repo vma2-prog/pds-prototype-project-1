@@ -1,16 +1,17 @@
 /* ==========================================================================
    TEMA ESCURO (DARK THEME) - BESTAND
    ========================================================================== */
-.root {
+.root,
+.app-root {
     /* Fundos principais */
-    -bg-app: #12161c;
-    -bg-sidebar: #161b22;
-    -bg-topbar: #161b22;
-    -bg-card: #1c222b;
-    -bg-input: #12161c;
-    -bg-input-focused: #1c222b;
-    -bg-hover: #242b35;
-    -bg-nav-hover: #21262d;
+    -bg-app: #111820;
+    -bg-sidebar: #1a1b1c;
+    -bg-topbar: #1c1b19;
+    -bg-card: #211f1d;
+    -bg-input: #151a20;
+    -bg-input-focused: #211f1d;
+    -bg-hover: #292724;
+    -bg-nav-hover: #242423;
     -bg-nav-active: rgba(52, 152, 219, 0.18);
     -bg-badge: #242b35;
 
@@ -45,4 +46,8 @@
 
     /* Sombras */
     -shadow-color: rgba(0, 0, 0, 0.35);
+
+    -fx-background-image: url("../textures/background-dots-dark.png");
+    -fx-background-repeat: repeat;
+    -fx-background-size: 40px 40px;
 }

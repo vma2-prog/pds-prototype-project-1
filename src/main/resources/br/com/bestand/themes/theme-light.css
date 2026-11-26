@@ -1,15 +1,16 @@
 /* ==========================================================================
    TEMA CLARO (LIGHT THEME) - BESTAND
    ========================================================================== */
-.root {
+.root,
+.app-root {
     /* Fundos principais */
-    -bg-app: #fafbfc;
-    -bg-sidebar: #f4f5f7;
-    -bg-topbar: #ffffff;
-    -bg-card: #ffffff;
-    -bg-input: #f8f9fa;
-    -bg-input-focused: #ffffff;
-    -bg-hover: #f4f5f7;
+    -bg-app: #f4f7fb;
+    -bg-sidebar: #f8f7f4;
+    -bg-topbar: #fffefa;
+    -bg-card: #fffdfa;
+    -bg-input: #f7f8fa;
+    -bg-input-focused: #fffefa;
+    -bg-hover: #f0f2f4;
     -bg-nav-hover: #e9ecef;
     -bg-nav-active: #e1effe;
     -bg-badge: #f4f5f7;
@@ -45,4 +46,8 @@
 
     /* Sombras */
     -shadow-color: rgba(44, 62, 80, 0.06);
+
+    -fx-background-image: url("../textures/background-dots-light.png");
+    -fx-background-repeat: repeat;
+    -fx-background-size: 40px 40px;
 }

@@ -3,7 +3,7 @@
    ========================================================================== */
 .produtos-container {
     -fx-padding: 28 30 28 30;
-    -fx-background-color: -bg-app;
+    -fx-background-color: transparent;
 }
 
 /* BARRA DE FILTROS E ORDENAÇÃO */
