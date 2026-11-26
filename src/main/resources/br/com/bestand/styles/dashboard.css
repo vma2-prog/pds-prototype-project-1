@@ -22,15 +22,6 @@
     -fx-text-fill: -text-primary;
 }
 
-.demo-badge {
-    -fx-padding: 5 9 5 9;
-    -fx-background-color: -bg-badge;
-    -fx-background-radius: 12;
-    -fx-text-fill: -text-muted;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-}
-
 .kpi-card {
     -fx-min-height: 168px;
 }

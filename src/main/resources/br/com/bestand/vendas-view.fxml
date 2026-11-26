@@ -22,7 +22,6 @@
                     <children>
                         <Label styleClass="page-title" text="Vendas e devoluções" />
                         <Label styleClass="page-subtitle" text="Registre vendas, controle o estoque e processe devoluções." />
-                        <Label styleClass="memory-notice" text="Os lançamentos ficam disponíveis somente enquanto o aplicativo estiver aberto." wrapText="true" />
                     </children>
                 </VBox>
 

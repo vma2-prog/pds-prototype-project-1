@@ -6,7 +6,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
@@ -53,16 +52,6 @@
                     </VBox.margin>
                 </Button>
 
-                <!-- RODAPÉ COM DICA -->
-                <HBox alignment="CENTER" spacing="6.0" styleClass="login-footer">
-                    <VBox.margin>
-                        <Insets top="6.0" />
-                    </VBox.margin>
-                    <children>
-                        <Label styleClass="login-hint-text" text="Acesso padrão do protótipo:" />
-                        <Label styleClass="login-hint-badge" text="admin" />
-                    </children>
-                </HBox>
             </children>
         </VBox>
 

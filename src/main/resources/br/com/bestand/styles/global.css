@@ -178,10 +178,7 @@
     -fx-background-color: transparent;
 }
 
-.memory-notice {
-    -fx-font-size: 11px;
-    -fx-text-fill: -status-warning;
-}
+
 
 .section-caption {
     -fx-font-size: 11px;

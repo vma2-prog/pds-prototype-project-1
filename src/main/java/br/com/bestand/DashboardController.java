@@ -161,7 +161,7 @@ public class DashboardController {
         ));
 
         tblUltimosRegistros.setItems(registros);
-        tblUltimosRegistros.setPlaceholder(new Label("Nenhuma movimentação registrada nesta sessão."));
+        tblUltimosRegistros.setPlaceholder(new Label("Nenhuma movimentação registrada."));
     }
 
     @FXML

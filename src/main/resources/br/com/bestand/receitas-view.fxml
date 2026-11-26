@@ -21,7 +21,6 @@
                     <children>
                         <Label styleClass="page-title" text="Receitas e análises" />
                         <Label styleClass="page-subtitle" text="Compare vendas, devoluções e custo de reposição em um período." />
-                        <Label styleClass="memory-notice" text="Análise dos lançamentos desta sessão. Os dados não são salvos após fechar o aplicativo." wrapText="true" />
                     </children>
                 </VBox>
 

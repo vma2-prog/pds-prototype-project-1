@@ -37,8 +37,6 @@
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
                         <Label fx:id="lblMesReferencia" styleClass="month-label" text="Novembro de 2026" />
-                        <Label styleClass="demo-badge" text="DADOS DA SESSÃO" />
-                        <Label styleClass="section-caption" text="Os lançamentos são apagados ao fechar o aplicativo." />
                     </children>
                 </HBox>
 

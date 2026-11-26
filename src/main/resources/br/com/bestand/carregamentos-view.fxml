@@ -19,7 +19,6 @@
                     <children>
                         <Label styleClass="page-title" text="Carregamentos" />
                         <Label styleClass="page-subtitle" text="Registre mercadorias recebidas e acompanhe o custo de reposição." />
-                        <Label styleClass="memory-notice" text="Cada carregamento aumenta o estoque. Os registros desta sessão são apagados ao fechar o aplicativo." wrapText="true" />
                     </children>
                 </VBox>
 
