@@ -1,0 +1,78 @@
+/* ==========================================================================
+   TELA DE GERENCIAMENTO DE PERFIS
+   ========================================================================== */
+.usuarios-container {
+    -fx-padding: 28 30 28 30;
+    -fx-background-color: -bg-app;
+}
+
+.profiles-card {
+    -fx-pref-width: 240px;
+    -fx-padding: 16;
+}
+
+.profiles-list {
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.profiles-list .list-cell {
+    -fx-padding: 10 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: -text-primary;
+}
+
+.profiles-list .list-cell:filled:hover,
+.profiles-list .list-cell:filled:selected {
+    -fx-background-color: -bg-hover;
+    -fx-text-fill: -text-primary;
+}
+
+.profile-form-card {
+    -fx-padding: 18;
+}
+
+.permissions-box {
+    -fx-padding: 4 0;
+}
+
+.permission-checkbox {
+    -fx-text-fill: -text-secondary;
+    -fx-padding: 4 0;
+}
+
+.permission-checkbox .box {
+    -fx-background-color: -bg-input;
+    -fx-border-color: -border-input;
+}
+
+.btn-secondary {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 16;
+    -fx-background-color: -bg-card;
+    -fx-border-color: -border-default;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -text-primary;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -bg-hover;
+}
+
+.btn-danger-compact {
+    -fx-pref-height: 36px;
+    -fx-padding: 0 16;
+    -fx-background-color: -status-danger-bg;
+    -fx-text-fill: -status-danger;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-danger-compact:hover {
+    -fx-background-color: -status-danger;
+    -fx-text-fill: -text-on-accent;
+}

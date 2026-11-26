@@ -37,7 +37,7 @@
                                     <children>
                                         <TextField fx:id="txtQuantidadeVenda" prefWidth="110.0" promptText="Quantidade" styleClass="module-input" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <Button onAction="#onRegistrarVenda" styleClass="btn-primary-compact" text="Registrar venda" />
+                                        <Button fx:id="btnRegistrarVenda" onAction="#onRegistrarVenda" styleClass="btn-primary-compact" text="Registrar venda" />
                                     </children>
                                 </HBox>
                             </children>
@@ -53,7 +53,7 @@
                                         <TextField fx:id="txtQuantidadeDevolucao" prefWidth="110.0" promptText="Quantidade" styleClass="module-input" />
                                         <Label fx:id="lblQtdDisponivel" styleClass="section-caption" text="Disponível: —" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <Button onAction="#onRegistrarDevolucao" styleClass="btn-secondary" text="Registrar devolução" />
+                                        <Button fx:id="btnRegistrarDevolucao" onAction="#onRegistrarDevolucao" styleClass="btn-secondary" text="Registrar devolução" />
                                     </children>
                                 </HBox>
                             </children>

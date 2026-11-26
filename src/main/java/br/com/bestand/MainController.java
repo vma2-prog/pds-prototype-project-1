@@ -7,12 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
@@ -40,6 +40,7 @@ public class MainController {
     @FXML private StackPane spaOutlet;
 
     private List<Button> navButtons;
+    private PerfilUsuario perfilSessao;
 
     private static final String ICON_LUA = "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z";
     private static final String ICON_SOL = "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42";
@@ -68,18 +69,16 @@ public class MainController {
         carregarSubView("dashboard-view.fxml", btnNavDashboard);
     }
 
-    /**
-     * Recebe o nome do usuário vindo do LoginController
-     */
-    public void configurarSessao(String usuario) {
-        if (usuario == null || usuario.isBlank()) return;
-
-        lblUsuarioNome.setText(usuario);
-        String iniciais = usuario.length() >= 2
-                ? usuario.substring(0, 2).toUpperCase()
-                : usuario.toUpperCase();
-        lblAvatarIniciais.setText(iniciais);
-        lblUsuarioCargo.setText("admin".equalsIgnoreCase(usuario) ? "Administrador" : "Operador");
+    public void configurarSessao(PerfilUsuario perfil) {
+        if (perfil == null) {
+            throw new IllegalArgumentException("O perfil da sessão é obrigatório.");
+        }
+        perfilSessao = perfil;
+        lblUsuarioNome.setText(perfil.getNome());
+        String nome = perfil.getNome();
+        lblAvatarIniciais.setText(nome.substring(0, Math.min(2, nome.length())).toUpperCase());
+        lblUsuarioCargo.setText(nome.equalsIgnoreCase("admin") ? "Administrador" : "Usuário");
+        atualizarNavegacaoPorPermissoes();
     }
 
     // =========================================================================
@@ -88,6 +87,9 @@ public class MainController {
 
 
     private void abrirProdutos(String filtroInicial) {
+        if (!permitir(Permissao.GERENCIAR_PRODUTOS)) {
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("produtos-view.fxml"));
             Node view = loader.load();
@@ -112,6 +114,9 @@ public class MainController {
 
     @FXML
     void onNavVendas(ActionEvent event) {
+        if (!podeAcessarVendas()) {
+            return;
+        }
         carregarSubView("vendas-view.fxml", btnNavVendas);
     }
 
@@ -122,17 +127,26 @@ public class MainController {
 
     @FXML
     void onNavCarregamentos(ActionEvent event) {
+        if (!permitir(Permissao.REGISTRAR_CARREGAMENTOS)) {
+            return;
+        }
         carregarSubView("carregamentos-view.fxml", btnNavCarregamentos);
     }
 
     @FXML
     private void onNavReceitas(ActionEvent event) {
+        if (!permitir(Permissao.CONSULTAR_RECEITAS)) {
+            return;
+        }
         carregarSubView("receitas-view.fxml", btnNavReceitas);
     }
 
     @FXML
     private void onNavConfiguracoes(ActionEvent event) {
-        exibirPlaceholderModulo("Configurações", "Gerenciamento de perfis de usuário e preferências (UC001 – UC003)", btnNavConfiguracoes);
+        if (!permitir(Permissao.GERENCIAR_USUARIOS)) {
+            return;
+        }
+        carregarSubView("usuarios-view.fxml", btnNavConfiguracoes);
     }
 
     public void carregarSubView(String fxmlFile, Button botaoAtivo) {
@@ -145,6 +159,8 @@ public class MainController {
             if (controller instanceof DashboardController) {
                 DashboardController dashboardController = (DashboardController) controller;
                 dashboardController.setMainController(this);
+            } else if (controller instanceof VendasController vendasController && perfilSessao != null) {
+                vendasController.configurarPermissoes(perfilSessao.getPermissoes());
             }
 
             spaOutlet.getChildren().setAll(view);
@@ -155,28 +171,6 @@ public class MainController {
         }
     }
 
-    private void exibirPlaceholderModulo(String titulo, String subtitulo, Button botaoAtivo) {
-        VBox container = new VBox(20);
-        container.getStyleClass().add("content-area");
-
-        VBox header = new VBox(2);
-        Label lblTitulo = new Label(titulo);
-        lblTitulo.getStyleClass().add("page-title");
-        Label lblSub = new Label(subtitulo);
-        lblSub.getStyleClass().add("page-subtitle");
-        header.getChildren().addAll(lblTitulo, lblSub);
-
-        StackPane card = new StackPane();
-        card.getStyleClass().add("placeholder-card");
-        Label lblAviso = new Label("Módulo \"" + titulo + "\" pronto para receber seu arquivo .fxml dedicado.");
-        lblAviso.getStyleClass().add("page-subtitle");
-        card.getChildren().add(lblAviso);
-
-        container.getChildren().addAll(header, card);
-        spaOutlet.getChildren().setAll(container);
-        marcarBotaoAtivo(botaoAtivo);
-    }
-
     private void marcarBotaoAtivo(Button ativo) {
         for (Button btn : navButtons) {
             btn.getStyleClass().remove("nav-btn-active");
@@ -184,6 +178,45 @@ public class MainController {
         if (ativo != null && !ativo.getStyleClass().contains("nav-btn-active")) {
             ativo.getStyleClass().add("nav-btn-active");
         }
+    }
+
+    private void atualizarNavegacaoPorPermissoes() {
+        configurarBotao(btnNavProdutos, perfilSessao.temPermissao(Permissao.GERENCIAR_PRODUTOS));
+        configurarBotao(btnNavVendas, perfilSessao.temPermissao(Permissao.REGISTRAR_VENDAS)
+                || perfilSessao.temPermissao(Permissao.REGISTRAR_DEVOLUCOES));
+        configurarBotao(btnNavCarregamentos, perfilSessao.temPermissao(Permissao.REGISTRAR_CARREGAMENTOS));
+        configurarBotao(btnNavReceitas, perfilSessao.temPermissao(Permissao.CONSULTAR_RECEITAS));
+        configurarBotao(btnNavConfiguracoes, perfilSessao.temPermissao(Permissao.GERENCIAR_USUARIOS));
+    }
+
+    private void configurarBotao(Button botao, boolean disponivel) {
+        botao.setVisible(disponivel);
+        botao.setManaged(disponivel);
+    }
+
+    private boolean permitir(Permissao permissao) {
+        if (perfilSessao != null && perfilSessao.temPermissao(permissao)) {
+            return true;
+        }
+        mostrarAcessoNegado();
+        return false;
+    }
+
+    private boolean podeAcessarVendas() {
+        if (perfilSessao != null && (perfilSessao.temPermissao(Permissao.REGISTRAR_VENDAS)
+                || perfilSessao.temPermissao(Permissao.REGISTRAR_DEVOLUCOES))) {
+            return true;
+        }
+        mostrarAcessoNegado();
+        return false;
+    }
+
+    private void mostrarAcessoNegado() {
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Acesso não permitido");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Seu perfil não tem permissão para acessar esta função.");
+        alerta.showAndWait();
     }
 
     // =========================================================================

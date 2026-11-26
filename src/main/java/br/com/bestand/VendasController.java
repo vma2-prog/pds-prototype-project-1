@@ -6,6 +6,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Set;
 
 public class VendasController {
 
@@ -23,6 +25,8 @@ public class VendasController {
     @FXML private TextField txtQuantidadeVenda;
     @FXML private TextField txtQuantidadeDevolucao;
     @FXML private Label lblQtdDisponivel;
+    @FXML private Button btnRegistrarVenda;
+    @FXML private Button btnRegistrarDevolucao;
 
     @FXML private TableView<LojaService.Venda> tblVendas;
     @FXML private TableColumn<LojaService.Venda, String> colDataVenda;
@@ -35,6 +39,19 @@ public class VendasController {
     private final LojaService loja = LojaService.getInstance();
     private FilteredList<LojaService.Venda> vendasDisponiveis;
     private final NumberFormat moeda = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
+    private boolean podeRegistrarVendas = true;
+    private boolean podeRegistrarDevolucoes = true;
+
+    public void configurarPermissoes(Set<Permissao> permissoes) {
+        podeRegistrarVendas = permissoes.contains(Permissao.REGISTRAR_VENDAS);
+        podeRegistrarDevolucoes = permissoes.contains(Permissao.REGISTRAR_DEVOLUCOES);
+        cmbProduto.setDisable(!podeRegistrarVendas);
+        txtQuantidadeVenda.setDisable(!podeRegistrarVendas);
+        btnRegistrarVenda.setDisable(!podeRegistrarVendas);
+        cmbVendaDevolucao.setDisable(!podeRegistrarDevolucoes);
+        txtQuantidadeDevolucao.setDisable(!podeRegistrarDevolucoes);
+        btnRegistrarDevolucao.setDisable(!podeRegistrarDevolucoes);
+    }
 
     @FXML
     public void initialize() {
@@ -107,6 +124,11 @@ public class VendasController {
 
     @FXML
     private void onRegistrarVenda(ActionEvent event) {
+        if (!podeRegistrarVendas) {
+            mostrarMensagem(Alert.AlertType.WARNING, "Acesso não permitido",
+                    "Seu perfil não tem permissão para registrar vendas.");
+            return;
+        }
         try {
             LojaService.Produto produto = cmbProduto.getValue();
             int quantidade = Integer.parseInt(txtQuantidadeVenda.getText().trim());
@@ -125,6 +147,11 @@ public class VendasController {
 
     @FXML
     private void onRegistrarDevolucao(ActionEvent event) {
+        if (!podeRegistrarDevolucoes) {
+            mostrarMensagem(Alert.AlertType.WARNING, "Acesso não permitido",
+                    "Seu perfil não tem permissão para registrar devoluções.");
+            return;
+        }
         try {
             LojaService.Venda venda = cmbVendaDevolucao.getValue();
             int quantidade = Integer.parseInt(txtQuantidadeDevolucao.getText().trim());
