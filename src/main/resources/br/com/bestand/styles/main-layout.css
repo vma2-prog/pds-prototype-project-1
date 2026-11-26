@@ -115,8 +115,9 @@
     -fx-border-color: -border-default;
 }
 
-.topbar-divider .line {
-    -fx-border-color: -border-default;
+.topbar-divider {
+    -fx-background-color: -border-default;
+    -fx-opacity: 0.8;
 }
 
 /* BOTÃO DE PERFIL & DROPDOWN */

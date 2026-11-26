@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
@@ -27,6 +28,7 @@ public class MainController {
     @FXML private Button btnNavCarregamentos;
     @FXML private Button btnNavReceitas;
     @FXML private Button btnNavConfiguracoes;
+    @FXML private VBox sidebarFooter;
 
     @FXML private TextField txtBuscaGlobal;
     @FXML private Button btnTema;
@@ -43,7 +45,7 @@ public class MainController {
     private PerfilUsuario perfilSessao;
 
     private static final String ICON_LUA = "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z";
-    private static final String ICON_SOL = "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42";
+    private static final String ICON_SOL = "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z M11 1h2v4h-2z M11 19h2v4h-2z M1 11h4v2H1z M19 11h4v2h-4z M3.5 4.9l1.4-1.4 2.8 2.8-1.4 1.4z M16.3 17.7l1.4-1.4 2.8 2.8-1.4 1.4z M3.5 19.1l2.8-2.8 1.4 1.4-2.8 2.8z M16.3 6.3l2.8-2.8 1.4 1.4-2.8 2.8z";
 
     @FXML
     public void initialize() {
@@ -161,6 +163,8 @@ public class MainController {
                 dashboardController.setMainController(this);
             } else if (controller instanceof VendasController vendasController && perfilSessao != null) {
                 vendasController.configurarPermissoes(perfilSessao.getPermissoes());
+            } else if (controller instanceof UsuariosController usuariosController && perfilSessao != null) {
+                usuariosController.configurarSessao(perfilSessao);
             }
 
             spaOutlet.getChildren().setAll(view);
@@ -186,7 +190,10 @@ public class MainController {
                 || perfilSessao.temPermissao(Permissao.REGISTRAR_DEVOLUCOES));
         configurarBotao(btnNavCarregamentos, perfilSessao.temPermissao(Permissao.REGISTRAR_CARREGAMENTOS));
         configurarBotao(btnNavReceitas, perfilSessao.temPermissao(Permissao.CONSULTAR_RECEITAS));
-        configurarBotao(btnNavConfiguracoes, perfilSessao.temPermissao(Permissao.GERENCIAR_USUARIOS));
+        boolean podeGerenciarUsuarios = perfilSessao.temPermissao(Permissao.GERENCIAR_USUARIOS);
+        configurarBotao(btnNavConfiguracoes, podeGerenciarUsuarios);
+        sidebarFooter.setVisible(podeGerenciarUsuarios);
+        sidebarFooter.setManaged(podeGerenciarUsuarios);
     }
 
     private void configurarBotao(Button botao, boolean disponivel) {

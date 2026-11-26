@@ -147,6 +147,21 @@ public final class UsuarioRepository {
         }
     }
 
+    public void atualizarSenha(String nome, String senhaHash, String salt) {
+        try (Connection connection = database.abrirConexao();
+             PreparedStatement statement = connection.prepareStatement(
+                     "UPDATE perfis SET senha_hash = ?, salt = ? WHERE nome = ?")) {
+            statement.setString(1, senhaHash);
+            statement.setString(2, salt);
+            statement.setString(3, nome);
+            if (statement.executeUpdate() == 0) {
+                throw new IllegalArgumentException("O perfil não foi encontrado.");
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Não foi possível alterar a senha do perfil.", e);
+        }
+    }
+
     public void remover(String nome) {
         try (Connection connection = database.abrirConexao();
              PreparedStatement statement = connection.prepareStatement(

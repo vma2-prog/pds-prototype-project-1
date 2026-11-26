@@ -91,6 +91,18 @@ public final class UsuarioService {
         return repository.buscarCredencial(nome).orElseThrow().perfil();
     }
 
+    public PerfilUsuario alterarSenhaPropria(String usuarioAutenticado, String nomePerfil, char[] novaSenha) {
+        if (usuarioAutenticado == null || nomePerfil == null
+                || !usuarioAutenticado.equalsIgnoreCase("admin")
+                || !nomePerfil.equalsIgnoreCase("admin")) {
+            throw new IllegalArgumentException("Somente o administrador pode alterar a própria senha.");
+        }
+        validarSenha(novaSenha);
+        byte[] salt = gerarSalt();
+        repository.atualizarSenha("admin", codificar(gerarHash(novaSenha, salt)), codificar(salt));
+        return repository.buscarCredencial("admin").orElseThrow().perfil();
+    }
+
     public void remover(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Selecione um perfil para remover.");

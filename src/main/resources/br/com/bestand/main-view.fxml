@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
@@ -55,9 +54,9 @@
                 <Region VBox.vgrow="ALWAYS" />
 
                 <!-- RODAPÉ DA BARRA LATERAL (CONFIGURAÇÕES) -->
-                <VBox styleClass="sidebar-footer">
+                <VBox fx:id="sidebarFooter" styleClass="sidebar-footer">
                     <children>
-                        <Button fx:id="btnNavConfiguracoes" maxWidth="Infinity" onAction="#onNavConfiguracoes" styleClass="nav-btn" text="Configurações">
+                        <Button fx:id="btnNavConfiguracoes" maxWidth="Infinity" onAction="#onNavConfiguracoes" styleClass="nav-btn" text="Perfis de Usuário">
                             <graphic>
                                 <SVGPath content="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.4 0a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" scaleX="0.7" scaleY="0.7" styleClass="nav-icon" />
                             </graphic>
@@ -94,7 +93,7 @@
                                 </Button>
 
                                 <!-- SEPARADOR VERTICAL -->
-                                <Separator orientation="VERTICAL" prefHeight="28.0" styleClass="topbar-divider" />
+                                <Region maxHeight="24.0" minHeight="24.0" minWidth="1.0" prefHeight="24.0" prefWidth="1.0" styleClass="topbar-divider" />
 
                                 <!-- BOTÃO DE PERFIL COM DROPDOWN "SAIR" -->
                                 <MenuButton fx:id="menuPerfil" styleClass="profile-menu-btn">

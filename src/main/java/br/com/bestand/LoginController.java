@@ -40,7 +40,7 @@ public class LoginController {
 
     // Vetores SVG para Lua (Tema Claro) e Sol (Tema Escuro)
     private static final String ICON_LUA = "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z";
-    private static final String ICON_SOL = "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42";
+    private static final String ICON_SOL = "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z M11 1h2v4h-2z M11 19h2v4h-2z M1 11h4v2H1z M19 11h4v2h-4z M3.5 4.9l1.4-1.4 2.8 2.8-1.4 1.4z M16.3 17.7l1.4-1.4 2.8 2.8-1.4 1.4z M3.5 19.1l2.8-2.8 1.4 1.4-2.8 2.8z M16.3 6.3l2.8-2.8 1.4 1.4-2.8 2.8z";
 
     private UsuarioService usuarioService;
 

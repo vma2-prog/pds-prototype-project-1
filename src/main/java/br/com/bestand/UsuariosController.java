@@ -12,7 +12,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -25,7 +27,7 @@ public class UsuariosController {
     @FXML private ListView<PerfilUsuario> listaPerfis;
     @FXML private TextField txtNome;
     @FXML private PasswordField txtSenha;
-    @FXML private FlowPane boxPermissoes;
+    @FXML private GridPane boxPermissoes;
     @FXML private Button btnNovo;
     @FXML private Button btnRemover;
     @FXML private Button btnSalvar;
@@ -34,6 +36,17 @@ public class UsuariosController {
     private final ObservableList<PerfilUsuario> perfis = FXCollections.observableArrayList();
     private final Map<Permissao, CheckBox> caixasPermissao = new EnumMap<>(Permissao.class);
     private PerfilUsuario perfilSelecionado;
+    private PerfilUsuario usuarioLogado;
+
+    private static final double LARGURA_MINIMA_COLUNA = 210;
+    private static final double ESPACAMENTO_COLUNAS = 16;
+
+    public void configurarSessao(PerfilUsuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+        if (perfilSelecionado != null) {
+            configurarFormulario(perfilSelecionado);
+        }
+    }
 
     @FXML
     public void initialize() {
@@ -60,9 +73,13 @@ public class UsuariosController {
         for (Permissao permissao : Permissao.values()) {
             CheckBox checkBox = new CheckBox(permissao.getDescricao());
             checkBox.getStyleClass().add("permission-checkbox");
+            checkBox.setWrapText(true);
+            checkBox.setMaxWidth(Double.MAX_VALUE);
             caixasPermissao.put(permissao, checkBox);
-            boxPermissoes.getChildren().add(checkBox);
         }
+        boxPermissoes.widthProperty().addListener((observable, anterior, largura) ->
+                atualizarGradePermissoes(largura.doubleValue()));
+        atualizarGradePermissoes(boxPermissoes.getWidth());
         listaPerfis.getSelectionModel().selectedItemProperty().addListener(
                 (observable, anterior, selecionado) -> selecionarPerfil(selecionado));
         if (usuarioService != null) {
@@ -99,13 +116,21 @@ public class UsuariosController {
             PerfilUsuario salvo;
             if (perfilSelecionado == null) {
                 salvo = usuarioService.cadastrar(txtNome.getText(), senha, permissoes);
+            } else if (perfilSelecionado.getNome().equalsIgnoreCase("admin")) {
+                salvo = usuarioService.alterarSenhaPropria(
+                        usuarioLogado == null ? null : usuarioLogado.getNome(),
+                        perfilSelecionado.getNome(),
+                        senha
+                );
             } else {
                 salvo = usuarioService.atualizar(perfilSelecionado.getNome(), senha, permissoes);
             }
             String nomeSalvo = salvo.getNome();
             atualizarLista(nomeSalvo);
             mostrarMensagem(Alert.AlertType.INFORMATION, "Perfil salvo",
-                    "As informações do perfil foram salvas com sucesso.");
+                    nomeSalvo.equalsIgnoreCase("admin")
+                            ? "Sua senha foi alterada com sucesso."
+                            : "As informações do perfil foram salvas com sucesso.");
         } catch (IllegalArgumentException | IllegalStateException e) {
             mostrarMensagem(Alert.AlertType.WARNING, "Não foi possível salvar o perfil", e.getMessage());
         } finally {
@@ -145,19 +170,54 @@ public class UsuariosController {
 
     private void selecionarPerfil(PerfilUsuario perfil) {
         perfilSelecionado = perfil;
+        configurarFormulario(perfil);
+    }
+
+    private void configurarFormulario(PerfilUsuario perfil) {
         boolean novoPerfil = perfil == null;
         boolean perfilAdmin = perfil != null && perfil.getNome().equalsIgnoreCase("admin");
+        boolean adminAlterandoPropriaSenha = perfilAdmin && usuarioLogado != null
+                && usuarioLogado.getNome().equalsIgnoreCase(perfil.getNome());
         txtNome.setText(novoPerfil ? "" : perfil.getNome());
         txtNome.setDisable(!novoPerfil);
         txtSenha.clear();
-        txtSenha.setPromptText(novoPerfil ? "Senha obrigatória" : "Deixe vazio para manter a senha atual");
+        txtSenha.setDisable(perfilAdmin && !adminAlterandoPropriaSenha);
+        txtSenha.setPromptText(novoPerfil
+                ? "Senha obrigatória"
+                : adminAlterandoPropriaSenha
+                ? "Informe sua nova senha"
+                : "Deixe vazio para manter a senha atual");
         for (Permissao permissao : Permissao.values()) {
             CheckBox checkBox = caixasPermissao.get(permissao);
             checkBox.setSelected(perfil != null && perfil.temPermissao(permissao));
             checkBox.setDisable(perfilAdmin);
         }
-        btnSalvar.setDisable(perfilAdmin);
+        btnSalvar.setText(adminAlterandoPropriaSenha ? "Alterar minha senha" : "Salvar perfil");
+        btnSalvar.setDisable(perfilAdmin && !adminAlterandoPropriaSenha);
         btnRemover.setDisable(novoPerfil || perfilAdmin);
+    }
+
+    private void atualizarGradePermissoes(double largura) {
+        if (largura <= 0) {
+            return;
+        }
+        int colunas = Math.max(1, (int) Math.floor(
+                (largura + ESPACAMENTO_COLUNAS) / (LARGURA_MINIMA_COLUNA + ESPACAMENTO_COLUNAS)));
+        boxPermissoes.getChildren().clear();
+        boxPermissoes.getColumnConstraints().clear();
+        double larguraPercentual = 100.0 / colunas;
+        for (int coluna = 0; coluna < colunas; coluna++) {
+            ColumnConstraints constraints = new ColumnConstraints();
+            constraints.setPercentWidth(larguraPercentual);
+            constraints.setHgrow(Priority.ALWAYS);
+            constraints.setFillWidth(true);
+            boxPermissoes.getColumnConstraints().add(constraints);
+        }
+        int indice = 0;
+        for (CheckBox checkBox : caixasPermissao.values()) {
+            boxPermissoes.add(checkBox, indice % colunas, indice / colunas);
+            indice++;
+        }
     }
 
     private Set<Permissao> obterPermissoesSelecionadas() {

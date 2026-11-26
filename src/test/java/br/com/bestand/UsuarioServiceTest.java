@@ -90,6 +90,16 @@ public class UsuarioServiceTest {
         assertEquals(1, serviceReaberto.listarPerfis().size());
     }
 
+    @Test
+    public void apenasAdminPodeAlterarSuaPropriaSenha() {
+        service.alterarSenhaPropria("admin", "admin", "novaSenha".toCharArray());
+
+        assertTrue(service.autenticar("admin", "novaSenha".toCharArray()).isPresent());
+        assertFalse(service.autenticar("admin", "admin".toCharArray()).isPresent());
+        assertFalha(() -> service.alterarSenhaPropria("operador", "admin", "outra".toCharArray()));
+        assertFalha(() -> service.alterarSenhaPropria("admin", "operador", "outra".toCharArray()));
+    }
+
     private void assertFalha(Runnable operacao) {
         try {
             operacao.run();
